@@ -1,0 +1,305 @@
+# Programming Language
+
+## Open problems
+
+- Memory management on compound structures (arrays, structures, classes)
+- Error handling
+- Polimorphism
+- Little boilerplate
+- Standard library, IO design
+    - Library import system
+- System calls
+- Calling functions from the Linux API and C libraries
+
+## Specification
+
+Features:
+
+- Variables
+- Builtin datatypes:
+    - integers (byte, word, dword, qword aka. i8, i16, i32, i64)
+    - floats (only doubles)
+    - strings (C style)
+    - booleans
+    - arrays
+- Polymorphic datatypes
+- Control structures:
+    - conditionals
+    - while
+    - for (C style)
+    - match?
+- Functions
+- Data structures
+- Abstract Datatypes (but with no inheritance)
+- Interfaces
+
+Language name: Sol. Extension: `.sol`.
+
+Example program:
+
+```
+/*
+ *  Mając do dyspozycji semafory binarne, należy zaimplementować semafor ogólny
+ *  który zmniejszamy i zwiększamy o 1 lub o 3 (operacje P1, P3, V1, V3) –
+ *  oczywiście nigdy nie może być ujemny
+ */
+
+type GeneralSemaphore {
+
+	let n: integer;
+	let no_waiting: integer;
+	let mutex(1): BinarySemaphore;
+	let semP(0): BinarySemaphore;
+
+	Semaphore(n: integer) {
+		this.n = n;
+		this.no_waiting = 0;
+	}
+
+	// [n > 0]
+	procedure P1() {
+		mutex.p();
+		if (n == 0) {
+			no_waiting += 1;
+			mutex.v();
+			semP.p();
+			no_waiting -= 1;
+		}
+		n--;
+		mutex.v();
+	}
+
+	procedure V1() {
+		mutex.p();
+		n++;
+		if (no_waiting > 0) {
+			semP.v();
+		} else {
+			mutex.v();
+		}
+	}
+}
+```
+
+C style comments:
+
+```
+// Line comment
+/*
+    Block comment
+*/
+```
+
+Variables:
+
+```
+// Usage
+
+let x: byte = 21;
+let y: float = 31.24;
+let message: string = "Hello there";
+let is_valid: bool = true;
+let nums: array[byte] = [2, 3, 4, 5];
+
+// With type inference:
+
+let x = 21;
+let y = 31.24;
+let message = "Hello there";
+let is_valid = true;
+
+// Assignment
+
+x = 3;
+y = 41;
+message = "Hello Mark";
+is_valid = false;
+
+// Errors on type mismatch
+
+x = "foo";  // Error on line 4: conflicting types: [x] is of type [byte], ["foo"] is of type [string].
+```
+
+Functions:
+
+```
+procedure foo() {
+    // ...
+}
+
+// Parameter datatypes are necessary
+// No varargs.
+
+procedure bar(x: byte, s: string) {
+    // ...
+}
+
+// Return values
+
+procedure id(x: byte): int {
+    return x;
+}
+```
+
+Control structures:
+
+```
+if (x == 21) {
+    // ...
+} else {
+    // ...
+}
+
+while (x > 37) {
+    // ...
+}
+
+for (x: byte; x < 21; x += 1) {
+    // ...
+}
+```
+
+Structures:
+
+```
+// Definition
+
+type Person {
+    let name: string = "[Empty]";  // Optional default value
+    let age: byte;  // If no default value is defined, the value has to be
+                    // defined when defining an object of this structure
+}
+
+type Error {
+    let error_name: string = "Default Error";
+    let error_code: integer = 0;
+}
+
+// Usage
+
+procedure main(args: array[string]) {
+    let mark: Person = {
+        name = "Mark";
+        age = 21;
+    };
+
+    // With the default value defined
+    let empty: Person = {
+        age = 21;
+    }
+
+    // When all fields have default values
+    let default_error: Error;
+
+    // Field access
+    print(mark.name);
+    print(mark.age);
+}
+```
+
+Abstract datatypes:
+
+```
+// Definition
+
+type Stack {
+    let elements: array[byte];
+    let i: integer = 0;
+
+    Stack(size: byte) {
+        // How do I initialize an array?
+        // How do I use the heap?
+        // How to solve memory management?
+        // Maybe don't implement arrays for now, and assume all variables are
+        // automatic.
+    }
+
+    procedure size(): integer {
+        return length(elements);
+    }
+
+    procedure push(x: byte) {
+        // The constructor takes a [size] argument
+        array[i] = x;
+        i += 1;
+    }
+
+    procedure pop(): byte {
+        if (i > 0) {
+            let retval: byte = array[i];
+            i -= 1;
+            return retval;
+        } else {
+            // How to solve error handling?
+        }
+    }
+}
+
+// Usage
+
+procedure main(args: array[string]) {
+    let stack: Stack(10);
+    stack.push(10);
+    let top: byte = stack.pop();
+    print(stack.size());
+}
+
+// Interfaces
+
+interface Stream {
+    procedure write(b: byte);
+    procedure read(): byte;
+    procedure close();
+}
+
+type Terminal : Stream {
+    procedure write(b: byte) {
+        // ...
+    }
+
+    procedure read(): byte {
+        // ...
+    }
+
+    procedure close() {
+        // ...
+    }
+}
+
+// Usage
+
+import IO;  // How to solve library inclusion?
+
+procedure write_hello(s: Stream) {
+    s.write("Hello there\n");
+}
+
+procedure main(args: array[string]) {
+    let term: Stream = IO.Terminal;  // Reference assignment, not object copy
+    term.write("hello");  // Call via a reference
+    IO.Terminal.write();  // Direct call
+    let command: string = term.read(20);
+}
+```
+
+## First subset
+
+First subset of the language should include:
+
+- Variables
+- Functions
+- Control structures
+    - if
+    - while
+
+## Work plan
+
+- [x] Write a rudimentary design spec
+- [x] Choose a subset of features for the first iteration
+- [ ] Write down the language syntax in BNF
+- [ ] Generate a parser in ANTLR
+- [ ] Read about LLVM IR
+- [ ] Write a code which maps the AST to LLVM IR
+- [ ] Generate a binary and run it
+
+- Think about a domain specific language and write one.
