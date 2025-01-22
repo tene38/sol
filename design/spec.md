@@ -10,6 +10,9 @@
     - Library import system
 - System calls
 - Calling functions from the Linux API and C libraries
+- Which to choose:
+    - Function overloading
+    - Named parameters with default values
 
 ## Specification
 
@@ -17,7 +20,8 @@ Features:
 
 - Variables
 - Builtin datatypes:
-    - integers (byte, word, dword, qword aka. i8, i16, i32, i64)
+    - integers (byte, word, integer, qword aka. i8, i16, i32, i64)
+        - int32, integer32, integer8, int8
     - floats (only doubles)
     - strings (C style)
     - booleans
@@ -277,7 +281,7 @@ procedure write_hello(s: Stream) {
 procedure main(args: array[string]) {
     let term: Stream = IO.Terminal;  // Reference assignment, not object copy
     term.write("hello");  // Call via a reference
-    IO.Terminal.write();  // Direct call
+    Terminal.write();  // Direct call
     let command: string = term.read(20);
 }
 ```
@@ -303,3 +307,6 @@ First subset of the language should include:
 - [ ] Generate a binary and run it
 
 - Think about a domain specific language and write one.
+- Read about dependent type systems. Can one be implemented in a language with
+    operational semantics?
+- What really are static and dynamic types?
