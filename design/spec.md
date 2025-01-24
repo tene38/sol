@@ -13,6 +13,8 @@
 - Which to choose:
     - Function overloading
     - Named parameters with default values
+- String interpolation
+- Variable scoping
 
 ## Specification
 
@@ -36,6 +38,7 @@ Features:
 - Data structures
 - Abstract Datatypes (but with no inheritance)
 - Interfaces
+- Double pass compilation
 
 Language name: Sol. Extension: `.sol`.
 
@@ -310,3 +313,84 @@ First subset of the language should include:
 - Read about dependent type systems. Can one be implemented in a language with
     operational semantics?
 - What really are static and dynamic types?
+
+## Language Grammar
+
+```
+#
+# Top level
+#
+
+program = top_level_statement*
+top_level_statement = import | assignment | procedure | struct
+import = 'import' ident ';'
+
+#
+# Statements
+#
+
+assignment = 'let' ident [':' ident] '=' expression ';' 
+           | 'let' ident ':' ident '=' '{' [struct_assignment (, struct_assignment)*] '}'
+struct_assignment = ident '=' expression ';'
+declaration = 'let' ident ':' ident ';'
+
+statement = expression_statement | assignment | conditional | loop | block
+expression_statement = expression ';'
+block = '{' statement* '}'
+
+procedure = 'procedure' ident args [':' ident] '{' statement* '}'
+args = '(' [arg (, arg)*] ')'
+arg = ident ':' ident
+
+struct = 'type' ident '{' (declaration | assignment)* '}'
+
+for_loop = 'for' '(' assignment ';' expression ';' expression ')' '{' statement* '}'
+while_loop = 'while' '(' expression ')' '{' statement* '}'
+loop = for_loop | while_loop
+
+# Note: `block` was defined as a `statement` so that we can do nested ifs. I'm
+# not sure if I like it.
+conditional = 'if' '(' expression ')' statement [else statement]
+
+conditional_alt = 'if' '(' expression ')' '{' statement* '} [
+                    else ('{' statement* '}' | conditional)
+
+#
+# Atomic values
+# 
+
+ident = [A-Za-z_][A-Za-z_0-9]*
+integer = [0-9]+
+float = [0-9]+ '.' [0.9]+
+string = '\'' .* '\''  # TODO: add escape sequences
+boolean = 'true' | 'false'
+value = integer | float | string
+LF = '\r'? '\n'
+
+#
+# Expressions
+#
+
+# TODO: Should I include binary operators (& | ^)?
+# TODO: Operator precedence has to be somehow included in the BNF
+
+expression = value
+           | ident
+           | func_call
+           | expression binary_operator expression
+           | unary_operator expression
+
+arith_bin_op = '+' | '-' | '/' | '%' | '*'
+logic_bin_op = '&&' | '||' | '>' | '<' | '>=' | '<=' | '==' | '!='
+binary_operator = arith_bin_op | logic_bin_op
+unary_operator = '-' | '+' | '!'
+func_call = ident '(' [expression (, expression)*] ')'
+
+#
+# Comments (not technically processed by the grammar)
+#
+
+BLOCK_COMMENT = '/*' .* '*/'
+LINE_COMMENT = '//' .* LF
+COMMENT = BLOCK_COMMENT | LINE_COMMENT
+```
