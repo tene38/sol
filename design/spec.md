@@ -293,19 +293,53 @@ procedure main(args: array[string]) {
 
 First subset of the language should include:
 
-- Variables
 - Functions
-- Control structures
-    - if
-    - while
+- Integers
+
+The syntax of functions shall be constrained to:
+
+```
+procedure add(x: int, y: int): int {
+    return x + y;
+}
+
+procedure compute(x: int, y: int): int {
+    return add(x, y) * add(y, x);
+}
+```
+
+The grammar of the language is:
+
+```
+program = procedure*
+
+procedure = 'procedure' ident args [':' ident] '{' return_statement '}'
+args = '(' [arg (, arg)*] ')'
+arg = ident ':' 'int'
+retrun_statement = 'return' expression
+
+ident = [A-Za-z_][A-Za-z_0-9]*
+integer = [0-9]+
+
+expression = integer
+           | ident
+           | func_call
+           | expression arith_binop expression
+
+arith_binop = '+' (precedence 20)
+            | '-' (precedence 30)
+            | '/' (precedence 35)
+            | '*' (precedence 40)
+func_call = ident '(' [expression (, expression)*] ')'
+```
 
 ## Work plan
 
 - [x] Write a rudimentary design spec
 - [x] Choose a subset of features for the first iteration
-- [ ] Write down the language syntax in BNF
+- [x] Write down the language syntax in BNF
 - [ ] Generate a parser in ANTLR
-- [ ] Read about LLVM IR
+- [x] Read about LLVM IR
 - [ ] Write a code which maps the AST to LLVM IR
 - [ ] Generate a binary and run it
 

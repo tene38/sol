@@ -1,21 +1,23 @@
 grammar Sol;
 
-program : top_level_statement*? ;
-top_level_statement : import_statement | assignment | procedure;
-import_statement : 'import' IDENT ';' ;
+program : procedure*? ;
 
-assignment : 'let' IDENT (':' IDENT)? '=' VALUE ';' ;
-declaration : 'let' IDENT ':' IDENT ';' ;
-
-statement : assignment ;
-
-procedure : 'procedure' IDENT args (':' IDENT)? '{' statement* '}' ;
+procedure : 'procedure' IDENT args (':' 'int')? '{' return_statement '}' ;
 args : '(' (arg (',' arg)*)? ')' ;
-arg : IDENT ':' IDENT ;
+arg : IDENT ':' 'int' ;
+
+return_statement : 'return' expression ';' ;
+
+expression : INT
+	   | IDENT
+	   | func_call
+	   | expression binop expression ;
+
+func_call : IDENT '(' (expression (',' expression)*)? ')' ;
+
+binop : '+' | '-' | '/' | '*' ;
 
 IDENT : [A-Za-z_][A-Za-z_0-9]* ;
-VALUE : INT | FLOAT ;
-FLOAT : [0-9]+ '.' [0-9]+ ;
 INT : [0-9]+ ;
 
 LF : '\r'? '\n' -> skip ;
