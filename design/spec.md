@@ -338,9 +338,11 @@ func_call = ident '(' [expression (, expression)*] ')'
 - [x] Write a rudimentary design spec
 - [x] Choose a subset of features for the first iteration
 - [x] Write down the language syntax in BNF
-- [ ] Generate a parser in ANTLR
+- [x] Generate a parser in ANTLR
 - [x] Read about LLVM IR
-- [ ] Write a code which maps the AST to LLVM IR
+- [ ] Implement an AST
+- [ ] Implement a visitor, which maps the parse tree to the AST
+- [ ] Implement a visitor, which maps the AST to LLVM IR
 - [ ] Generate a binary and run it
 
 - Think about a domain specific language and write one.
