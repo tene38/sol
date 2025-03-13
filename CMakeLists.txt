@@ -21,7 +21,7 @@ target_sources(solc PRIVATE
 
 target_include_directories(solc PRIVATE 
     ${LLVM_INCLUDE_DIRS}
-    parser
+    src
 )
 
 # TODO: make this work with packages from Conan. This makefile isn't portable in
