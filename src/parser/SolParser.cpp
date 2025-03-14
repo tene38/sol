@@ -54,8 +54,7 @@ void solParserInitialize() {
 #endif
   auto staticData = std::make_unique<SolParserStaticData>(
     std::vector<std::string>{
-      "program", "procedure", "args", "arg", "return_statement", "expression", 
-      "func_call"
+      "program", "procedure", "args", "arg", "returnStatement", "expression"
     },
     std::vector<std::string>{
       "", "'procedure'", "':'", "'int'", "'{'", "'}'", "'('", "','", "')'", 
@@ -67,32 +66,32 @@ void solParserInitialize() {
     }
   );
   static const int32_t serializedATNSegment[] = {
-  	4,1,20,90,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,1,0,
-  	5,0,16,8,0,10,0,12,0,19,9,0,1,1,1,1,1,1,1,1,1,1,3,1,26,8,1,1,1,1,1,1,
-  	1,1,1,1,2,1,2,1,2,1,2,5,2,36,8,2,10,2,12,2,39,9,2,3,2,41,8,2,1,2,1,2,
-  	1,3,1,3,1,3,1,3,1,4,1,4,1,4,1,4,1,5,1,5,1,5,1,5,3,5,57,8,5,1,5,1,5,1,
-  	5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,5,5,71,8,5,10,5,12,5,74,9,5,1,6,
-  	1,6,1,6,1,6,1,6,5,6,81,8,6,10,6,12,6,84,9,6,3,6,86,8,6,1,6,1,6,1,6,1,
-  	17,1,10,7,0,2,4,6,8,10,12,0,0,94,0,17,1,0,0,0,2,20,1,0,0,0,4,31,1,0,0,
-  	0,6,44,1,0,0,0,8,48,1,0,0,0,10,56,1,0,0,0,12,75,1,0,0,0,14,16,3,2,1,0,
-  	15,14,1,0,0,0,16,19,1,0,0,0,17,18,1,0,0,0,17,15,1,0,0,0,18,1,1,0,0,0,
-  	19,17,1,0,0,0,20,21,5,1,0,0,21,22,5,15,0,0,22,25,3,4,2,0,23,24,5,2,0,
-  	0,24,26,5,3,0,0,25,23,1,0,0,0,25,26,1,0,0,0,26,27,1,0,0,0,27,28,5,4,0,
-  	0,28,29,3,8,4,0,29,30,5,5,0,0,30,3,1,0,0,0,31,40,5,6,0,0,32,37,3,6,3,
-  	0,33,34,5,7,0,0,34,36,3,6,3,0,35,33,1,0,0,0,36,39,1,0,0,0,37,35,1,0,0,
-  	0,37,38,1,0,0,0,38,41,1,0,0,0,39,37,1,0,0,0,40,32,1,0,0,0,40,41,1,0,0,
-  	0,41,42,1,0,0,0,42,43,5,8,0,0,43,5,1,0,0,0,44,45,5,15,0,0,45,46,5,2,0,
-  	0,46,47,5,3,0,0,47,7,1,0,0,0,48,49,5,9,0,0,49,50,3,10,5,0,50,51,5,10,
-  	0,0,51,9,1,0,0,0,52,53,6,5,-1,0,53,57,5,16,0,0,54,57,5,15,0,0,55,57,3,
-  	12,6,0,56,52,1,0,0,0,56,54,1,0,0,0,56,55,1,0,0,0,57,72,1,0,0,0,58,59,
-  	10,4,0,0,59,60,5,11,0,0,60,71,3,10,5,5,61,62,10,3,0,0,62,63,5,12,0,0,
-  	63,71,3,10,5,4,64,65,10,2,0,0,65,66,5,13,0,0,66,71,3,10,5,3,67,68,10,
-  	1,0,0,68,69,5,14,0,0,69,71,3,10,5,2,70,58,1,0,0,0,70,61,1,0,0,0,70,64,
-  	1,0,0,0,70,67,1,0,0,0,71,74,1,0,0,0,72,70,1,0,0,0,72,73,1,0,0,0,73,11,
-  	1,0,0,0,74,72,1,0,0,0,75,76,5,15,0,0,76,85,5,6,0,0,77,82,3,10,5,0,78,
-  	79,5,7,0,0,79,81,3,10,5,0,80,78,1,0,0,0,81,84,1,0,0,0,82,80,1,0,0,0,82,
-  	83,1,0,0,0,83,86,1,0,0,0,84,82,1,0,0,0,85,77,1,0,0,0,85,86,1,0,0,0,86,
-  	87,1,0,0,0,87,88,5,8,0,0,88,13,1,0,0,0,9,17,25,37,40,56,70,72,82,85
+  	4,1,20,86,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,1,0,5,0,14,
+  	8,0,10,0,12,0,17,9,0,1,1,1,1,1,1,1,1,1,1,3,1,24,8,1,1,1,1,1,1,1,1,1,1,
+  	2,1,2,1,2,1,2,5,2,34,8,2,10,2,12,2,37,9,2,3,2,39,8,2,1,2,1,2,1,3,1,3,
+  	1,3,1,3,1,4,1,4,1,4,1,4,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,5,5,59,8,5,10,
+  	5,12,5,62,9,5,3,5,64,8,5,1,5,3,5,67,8,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,
+  	5,1,5,1,5,1,5,1,5,5,5,81,8,5,10,5,12,5,84,9,5,1,5,1,15,1,10,6,0,2,4,6,
+  	8,10,0,0,91,0,15,1,0,0,0,2,18,1,0,0,0,4,29,1,0,0,0,6,42,1,0,0,0,8,46,
+  	1,0,0,0,10,66,1,0,0,0,12,14,3,2,1,0,13,12,1,0,0,0,14,17,1,0,0,0,15,16,
+  	1,0,0,0,15,13,1,0,0,0,16,1,1,0,0,0,17,15,1,0,0,0,18,19,5,1,0,0,19,20,
+  	5,15,0,0,20,23,3,4,2,0,21,22,5,2,0,0,22,24,5,3,0,0,23,21,1,0,0,0,23,24,
+  	1,0,0,0,24,25,1,0,0,0,25,26,5,4,0,0,26,27,3,8,4,0,27,28,5,5,0,0,28,3,
+  	1,0,0,0,29,38,5,6,0,0,30,35,3,6,3,0,31,32,5,7,0,0,32,34,3,6,3,0,33,31,
+  	1,0,0,0,34,37,1,0,0,0,35,33,1,0,0,0,35,36,1,0,0,0,36,39,1,0,0,0,37,35,
+  	1,0,0,0,38,30,1,0,0,0,38,39,1,0,0,0,39,40,1,0,0,0,40,41,5,8,0,0,41,5,
+  	1,0,0,0,42,43,5,15,0,0,43,44,5,2,0,0,44,45,5,3,0,0,45,7,1,0,0,0,46,47,
+  	5,9,0,0,47,48,3,10,5,0,48,49,5,10,0,0,49,9,1,0,0,0,50,51,6,5,-1,0,51,
+  	67,5,16,0,0,52,67,5,15,0,0,53,54,5,15,0,0,54,63,5,6,0,0,55,60,3,10,5,
+  	0,56,57,5,7,0,0,57,59,3,10,5,0,58,56,1,0,0,0,59,62,1,0,0,0,60,58,1,0,
+  	0,0,60,61,1,0,0,0,61,64,1,0,0,0,62,60,1,0,0,0,63,55,1,0,0,0,63,64,1,0,
+  	0,0,64,65,1,0,0,0,65,67,5,8,0,0,66,50,1,0,0,0,66,52,1,0,0,0,66,53,1,0,
+  	0,0,67,82,1,0,0,0,68,69,10,4,0,0,69,70,5,11,0,0,70,81,3,10,5,5,71,72,
+  	10,3,0,0,72,73,5,12,0,0,73,81,3,10,5,4,74,75,10,2,0,0,75,76,5,13,0,0,
+  	76,81,3,10,5,3,77,78,10,1,0,0,78,79,5,14,0,0,79,81,3,10,5,2,80,68,1,0,
+  	0,0,80,71,1,0,0,0,80,74,1,0,0,0,80,77,1,0,0,0,81,84,1,0,0,0,82,80,1,0,
+  	0,0,82,83,1,0,0,0,83,11,1,0,0,0,84,82,1,0,0,0,9,15,23,35,38,60,63,66,
+  	80,82
   };
   staticData->serializedATN = antlr4::atn::SerializedATNView(serializedATNSegment, sizeof(serializedATNSegment) / sizeof(serializedATNSegment[0]));
 
@@ -194,15 +193,15 @@ SolParser::ProgramContext* SolParser::program() {
   try {
     size_t alt;
     enterOuterAlt(_localctx, 1);
-    setState(17);
+    setState(15);
     _errHandler->sync(this);
     alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 0, _ctx);
     while (alt != 1 && alt != atn::ATN::INVALID_ALT_NUMBER) {
       if (alt == 1 + 1) {
-        setState(14);
+        setState(12);
         procedure(); 
       }
-      setState(19);
+      setState(17);
       _errHandler->sync(this);
       alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 0, _ctx);
     }
@@ -231,8 +230,8 @@ SolParser::ArgsContext* SolParser::ProcedureContext::args() {
   return getRuleContext<SolParser::ArgsContext>(0);
 }
 
-SolParser::Return_statementContext* SolParser::ProcedureContext::return_statement() {
-  return getRuleContext<SolParser::Return_statementContext>(0);
+SolParser::ReturnStatementContext* SolParser::ProcedureContext::returnStatement() {
+  return getRuleContext<SolParser::ReturnStatementContext>(0);
 }
 
 
@@ -274,27 +273,27 @@ SolParser::ProcedureContext* SolParser::procedure() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(20);
+    setState(18);
     match(SolParser::T__0);
-    setState(21);
+    setState(19);
     match(SolParser::IDENT);
-    setState(22);
+    setState(20);
     args();
-    setState(25);
+    setState(23);
     _errHandler->sync(this);
 
     _la = _input->LA(1);
     if (_la == SolParser::T__1) {
-      setState(23);
+      setState(21);
       match(SolParser::T__1);
-      setState(24);
+      setState(22);
       match(SolParser::T__2);
     }
-    setState(27);
+    setState(25);
     match(SolParser::T__3);
-    setState(28);
-    return_statement();
-    setState(29);
+    setState(26);
+    returnStatement();
+    setState(27);
     match(SolParser::T__4);
    
   }
@@ -360,29 +359,29 @@ SolParser::ArgsContext* SolParser::args() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(31);
+    setState(29);
     match(SolParser::T__5);
-    setState(40);
+    setState(38);
     _errHandler->sync(this);
 
     _la = _input->LA(1);
     if (_la == SolParser::IDENT) {
-      setState(32);
+      setState(30);
       arg();
-      setState(37);
+      setState(35);
       _errHandler->sync(this);
       _la = _input->LA(1);
       while (_la == SolParser::T__6) {
-        setState(33);
+        setState(31);
         match(SolParser::T__6);
-        setState(34);
+        setState(32);
         arg();
-        setState(39);
+        setState(37);
         _errHandler->sync(this);
         _la = _input->LA(1);
       }
     }
-    setState(42);
+    setState(40);
     match(SolParser::T__7);
    
   }
@@ -443,11 +442,11 @@ SolParser::ArgContext* SolParser::arg() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(44);
+    setState(42);
     match(SolParser::IDENT);
-    setState(45);
+    setState(43);
     match(SolParser::T__1);
-    setState(46);
+    setState(44);
     match(SolParser::T__2);
    
   }
@@ -460,44 +459,44 @@ SolParser::ArgContext* SolParser::arg() {
   return _localctx;
 }
 
-//----------------- Return_statementContext ------------------------------------------------------------------
+//----------------- ReturnStatementContext ------------------------------------------------------------------
 
-SolParser::Return_statementContext::Return_statementContext(ParserRuleContext *parent, size_t invokingState)
+SolParser::ReturnStatementContext::ReturnStatementContext(ParserRuleContext *parent, size_t invokingState)
   : ParserRuleContext(parent, invokingState) {
 }
 
-SolParser::ExpressionContext* SolParser::Return_statementContext::expression() {
+SolParser::ExpressionContext* SolParser::ReturnStatementContext::expression() {
   return getRuleContext<SolParser::ExpressionContext>(0);
 }
 
 
-size_t SolParser::Return_statementContext::getRuleIndex() const {
-  return SolParser::RuleReturn_statement;
+size_t SolParser::ReturnStatementContext::getRuleIndex() const {
+  return SolParser::RuleReturnStatement;
 }
 
-void SolParser::Return_statementContext::enterRule(tree::ParseTreeListener *listener) {
+void SolParser::ReturnStatementContext::enterRule(tree::ParseTreeListener *listener) {
   auto parserListener = dynamic_cast<SolListener *>(listener);
   if (parserListener != nullptr)
-    parserListener->enterReturn_statement(this);
+    parserListener->enterReturnStatement(this);
 }
 
-void SolParser::Return_statementContext::exitRule(tree::ParseTreeListener *listener) {
+void SolParser::ReturnStatementContext::exitRule(tree::ParseTreeListener *listener) {
   auto parserListener = dynamic_cast<SolListener *>(listener);
   if (parserListener != nullptr)
-    parserListener->exitReturn_statement(this);
+    parserListener->exitReturnStatement(this);
 }
 
 
-std::any SolParser::Return_statementContext::accept(tree::ParseTreeVisitor *visitor) {
+std::any SolParser::ReturnStatementContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<SolVisitor*>(visitor))
-    return parserVisitor->visitReturn_statement(this);
+    return parserVisitor->visitReturnStatement(this);
   else
     return visitor->visitChildren(this);
 }
 
-SolParser::Return_statementContext* SolParser::return_statement() {
-  Return_statementContext *_localctx = _tracker.createInstance<Return_statementContext>(_ctx, getState());
-  enterRule(_localctx, 8, SolParser::RuleReturn_statement);
+SolParser::ReturnStatementContext* SolParser::returnStatement() {
+  ReturnStatementContext *_localctx = _tracker.createInstance<ReturnStatementContext>(_ctx, getState());
+  enterRule(_localctx, 8, SolParser::RuleReturnStatement);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -508,11 +507,11 @@ SolParser::Return_statementContext* SolParser::return_statement() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(48);
+    setState(46);
     match(SolParser::T__8);
-    setState(49);
+    setState(47);
     expression(0);
-    setState(50);
+    setState(48);
     match(SolParser::T__9);
    
   }
@@ -531,51 +530,127 @@ SolParser::ExpressionContext::ExpressionContext(ParserRuleContext *parent, size_
   : ParserRuleContext(parent, invokingState) {
 }
 
-tree::TerminalNode* SolParser::ExpressionContext::INT() {
-  return getToken(SolParser::INT, 0);
-}
-
-tree::TerminalNode* SolParser::ExpressionContext::IDENT() {
-  return getToken(SolParser::IDENT, 0);
-}
-
-SolParser::Func_callContext* SolParser::ExpressionContext::func_call() {
-  return getRuleContext<SolParser::Func_callContext>(0);
-}
-
-std::vector<SolParser::ExpressionContext *> SolParser::ExpressionContext::expression() {
-  return getRuleContexts<SolParser::ExpressionContext>();
-}
-
-SolParser::ExpressionContext* SolParser::ExpressionContext::expression(size_t i) {
-  return getRuleContext<SolParser::ExpressionContext>(i);
-}
-
 
 size_t SolParser::ExpressionContext::getRuleIndex() const {
   return SolParser::RuleExpression;
 }
 
-void SolParser::ExpressionContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<SolListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterExpression(this);
+void SolParser::ExpressionContext::copyFrom(ExpressionContext *ctx) {
+  ParserRuleContext::copyFrom(ctx);
 }
 
-void SolParser::ExpressionContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<SolListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitExpression(this);
+//----------------- IdentExprContext ------------------------------------------------------------------
+
+tree::TerminalNode* SolParser::IdentExprContext::IDENT() {
+  return getToken(SolParser::IDENT, 0);
 }
 
+SolParser::IdentExprContext::IdentExprContext(ExpressionContext *ctx) { copyFrom(ctx); }
 
-std::any SolParser::ExpressionContext::accept(tree::ParseTreeVisitor *visitor) {
+void SolParser::IdentExprContext::enterRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<SolListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->enterIdentExpr(this);
+}
+void SolParser::IdentExprContext::exitRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<SolListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->exitIdentExpr(this);
+}
+
+std::any SolParser::IdentExprContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<SolVisitor*>(visitor))
-    return parserVisitor->visitExpression(this);
+    return parserVisitor->visitIdentExpr(this);
   else
     return visitor->visitChildren(this);
 }
+//----------------- CallExprContext ------------------------------------------------------------------
 
+tree::TerminalNode* SolParser::CallExprContext::IDENT() {
+  return getToken(SolParser::IDENT, 0);
+}
+
+std::vector<SolParser::ExpressionContext *> SolParser::CallExprContext::expression() {
+  return getRuleContexts<SolParser::ExpressionContext>();
+}
+
+SolParser::ExpressionContext* SolParser::CallExprContext::expression(size_t i) {
+  return getRuleContext<SolParser::ExpressionContext>(i);
+}
+
+SolParser::CallExprContext::CallExprContext(ExpressionContext *ctx) { copyFrom(ctx); }
+
+void SolParser::CallExprContext::enterRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<SolListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->enterCallExpr(this);
+}
+void SolParser::CallExprContext::exitRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<SolListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->exitCallExpr(this);
+}
+
+std::any SolParser::CallExprContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<SolVisitor*>(visitor))
+    return parserVisitor->visitCallExpr(this);
+  else
+    return visitor->visitChildren(this);
+}
+//----------------- IntExprContext ------------------------------------------------------------------
+
+tree::TerminalNode* SolParser::IntExprContext::INT() {
+  return getToken(SolParser::INT, 0);
+}
+
+SolParser::IntExprContext::IntExprContext(ExpressionContext *ctx) { copyFrom(ctx); }
+
+void SolParser::IntExprContext::enterRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<SolListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->enterIntExpr(this);
+}
+void SolParser::IntExprContext::exitRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<SolListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->exitIntExpr(this);
+}
+
+std::any SolParser::IntExprContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<SolVisitor*>(visitor))
+    return parserVisitor->visitIntExpr(this);
+  else
+    return visitor->visitChildren(this);
+}
+//----------------- BinopExprContext ------------------------------------------------------------------
+
+std::vector<SolParser::ExpressionContext *> SolParser::BinopExprContext::expression() {
+  return getRuleContexts<SolParser::ExpressionContext>();
+}
+
+SolParser::ExpressionContext* SolParser::BinopExprContext::expression(size_t i) {
+  return getRuleContext<SolParser::ExpressionContext>(i);
+}
+
+SolParser::BinopExprContext::BinopExprContext(ExpressionContext *ctx) { copyFrom(ctx); }
+
+void SolParser::BinopExprContext::enterRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<SolListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->enterBinopExpr(this);
+}
+void SolParser::BinopExprContext::exitRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<SolListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->exitBinopExpr(this);
+}
+
+std::any SolParser::BinopExprContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<SolVisitor*>(visitor))
+    return parserVisitor->visitBinopExpr(this);
+  else
+    return visitor->visitChildren(this);
+}
 
 SolParser::ExpressionContext* SolParser::expression() {
    return expression(0);
@@ -590,7 +665,7 @@ SolParser::ExpressionContext* SolParser::expression(int precedence) {
   size_t startState = 10;
   enterRecursionRule(_localctx, 10, SolParser::RuleExpression, precedence);
 
-    
+    size_t _la = 0;
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -602,24 +677,60 @@ SolParser::ExpressionContext* SolParser::expression(int precedence) {
   try {
     size_t alt;
     enterOuterAlt(_localctx, 1);
-    setState(56);
+    setState(66);
     _errHandler->sync(this);
-    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 4, _ctx)) {
+    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 6, _ctx)) {
     case 1: {
-      setState(53);
+      _localctx = _tracker.createInstance<IntExprContext>(_localctx);
+      _ctx = _localctx;
+      previousContext = _localctx;
+
+      setState(51);
       match(SolParser::INT);
       break;
     }
 
     case 2: {
-      setState(54);
+      _localctx = _tracker.createInstance<IdentExprContext>(_localctx);
+      _ctx = _localctx;
+      previousContext = _localctx;
+      setState(52);
       match(SolParser::IDENT);
       break;
     }
 
     case 3: {
-      setState(55);
-      func_call();
+      _localctx = _tracker.createInstance<CallExprContext>(_localctx);
+      _ctx = _localctx;
+      previousContext = _localctx;
+      setState(53);
+      match(SolParser::IDENT);
+      setState(54);
+      match(SolParser::T__5);
+      setState(63);
+      _errHandler->sync(this);
+
+      _la = _input->LA(1);
+      if (_la == SolParser::IDENT
+
+      || _la == SolParser::INT) {
+        setState(55);
+        expression(0);
+        setState(60);
+        _errHandler->sync(this);
+        _la = _input->LA(1);
+        while (_la == SolParser::T__6) {
+          setState(56);
+          match(SolParser::T__6);
+          setState(57);
+          expression(0);
+          setState(62);
+          _errHandler->sync(this);
+          _la = _input->LA(1);
+        }
+      }
+      setState(65);
+      match(SolParser::T__7);
       break;
     }
 
@@ -627,65 +738,69 @@ SolParser::ExpressionContext* SolParser::expression(int precedence) {
       break;
     }
     _ctx->stop = _input->LT(-1);
-    setState(72);
+    setState(82);
     _errHandler->sync(this);
-    alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 6, _ctx);
+    alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 8, _ctx);
     while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
       if (alt == 1) {
         if (!_parseListeners.empty())
           triggerExitRuleEvent();
         previousContext = _localctx;
-        setState(70);
+        setState(80);
         _errHandler->sync(this);
-        switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 5, _ctx)) {
+        switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 7, _ctx)) {
         case 1: {
-          _localctx = _tracker.createInstance<ExpressionContext>(parentContext, parentState);
-          pushNewRecursionContext(_localctx, startState, RuleExpression);
-          setState(58);
+          auto newContext = _tracker.createInstance<BinopExprContext>(_tracker.createInstance<ExpressionContext>(parentContext, parentState));
+          _localctx = newContext;
+          pushNewRecursionContext(newContext, startState, RuleExpression);
+          setState(68);
 
           if (!(precpred(_ctx, 4))) throw FailedPredicateException(this, "precpred(_ctx, 4)");
-          setState(59);
-          match(SolParser::T__10);
-          setState(60);
+          setState(69);
+          antlrcpp::downCast<BinopExprContext *>(_localctx)->op = match(SolParser::T__10);
+          setState(70);
           expression(5);
           break;
         }
 
         case 2: {
-          _localctx = _tracker.createInstance<ExpressionContext>(parentContext, parentState);
-          pushNewRecursionContext(_localctx, startState, RuleExpression);
-          setState(61);
+          auto newContext = _tracker.createInstance<BinopExprContext>(_tracker.createInstance<ExpressionContext>(parentContext, parentState));
+          _localctx = newContext;
+          pushNewRecursionContext(newContext, startState, RuleExpression);
+          setState(71);
 
           if (!(precpred(_ctx, 3))) throw FailedPredicateException(this, "precpred(_ctx, 3)");
-          setState(62);
-          match(SolParser::T__11);
-          setState(63);
+          setState(72);
+          antlrcpp::downCast<BinopExprContext *>(_localctx)->op = match(SolParser::T__11);
+          setState(73);
           expression(4);
           break;
         }
 
         case 3: {
-          _localctx = _tracker.createInstance<ExpressionContext>(parentContext, parentState);
-          pushNewRecursionContext(_localctx, startState, RuleExpression);
-          setState(64);
+          auto newContext = _tracker.createInstance<BinopExprContext>(_tracker.createInstance<ExpressionContext>(parentContext, parentState));
+          _localctx = newContext;
+          pushNewRecursionContext(newContext, startState, RuleExpression);
+          setState(74);
 
           if (!(precpred(_ctx, 2))) throw FailedPredicateException(this, "precpred(_ctx, 2)");
-          setState(65);
-          match(SolParser::T__12);
-          setState(66);
+          setState(75);
+          antlrcpp::downCast<BinopExprContext *>(_localctx)->op = match(SolParser::T__12);
+          setState(76);
           expression(3);
           break;
         }
 
         case 4: {
-          _localctx = _tracker.createInstance<ExpressionContext>(parentContext, parentState);
-          pushNewRecursionContext(_localctx, startState, RuleExpression);
-          setState(67);
+          auto newContext = _tracker.createInstance<BinopExprContext>(_tracker.createInstance<ExpressionContext>(parentContext, parentState));
+          _localctx = newContext;
+          pushNewRecursionContext(newContext, startState, RuleExpression);
+          setState(77);
 
           if (!(precpred(_ctx, 1))) throw FailedPredicateException(this, "precpred(_ctx, 1)");
-          setState(68);
-          match(SolParser::T__13);
-          setState(69);
+          setState(78);
+          antlrcpp::downCast<BinopExprContext *>(_localctx)->op = match(SolParser::T__13);
+          setState(79);
           expression(2);
           break;
         }
@@ -694,9 +809,9 @@ SolParser::ExpressionContext* SolParser::expression(int precedence) {
           break;
         } 
       }
-      setState(74);
+      setState(84);
       _errHandler->sync(this);
-      alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 6, _ctx);
+      alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 8, _ctx);
     }
   }
   catch (RecognitionException &e) {
@@ -704,102 +819,6 @@ SolParser::ExpressionContext* SolParser::expression(int precedence) {
     _localctx->exception = std::current_exception();
     _errHandler->recover(this, _localctx->exception);
   }
-  return _localctx;
-}
-
-//----------------- Func_callContext ------------------------------------------------------------------
-
-SolParser::Func_callContext::Func_callContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
-
-tree::TerminalNode* SolParser::Func_callContext::IDENT() {
-  return getToken(SolParser::IDENT, 0);
-}
-
-std::vector<SolParser::ExpressionContext *> SolParser::Func_callContext::expression() {
-  return getRuleContexts<SolParser::ExpressionContext>();
-}
-
-SolParser::ExpressionContext* SolParser::Func_callContext::expression(size_t i) {
-  return getRuleContext<SolParser::ExpressionContext>(i);
-}
-
-
-size_t SolParser::Func_callContext::getRuleIndex() const {
-  return SolParser::RuleFunc_call;
-}
-
-void SolParser::Func_callContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<SolListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterFunc_call(this);
-}
-
-void SolParser::Func_callContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<SolListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitFunc_call(this);
-}
-
-
-std::any SolParser::Func_callContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<SolVisitor*>(visitor))
-    return parserVisitor->visitFunc_call(this);
-  else
-    return visitor->visitChildren(this);
-}
-
-SolParser::Func_callContext* SolParser::func_call() {
-  Func_callContext *_localctx = _tracker.createInstance<Func_callContext>(_ctx, getState());
-  enterRule(_localctx, 12, SolParser::RuleFunc_call);
-  size_t _la = 0;
-
-#if __cplusplus > 201703L
-  auto onExit = finally([=, this] {
-#else
-  auto onExit = finally([=] {
-#endif
-    exitRule();
-  });
-  try {
-    enterOuterAlt(_localctx, 1);
-    setState(75);
-    match(SolParser::IDENT);
-    setState(76);
-    match(SolParser::T__5);
-    setState(85);
-    _errHandler->sync(this);
-
-    _la = _input->LA(1);
-    if (_la == SolParser::IDENT
-
-    || _la == SolParser::INT) {
-      setState(77);
-      expression(0);
-      setState(82);
-      _errHandler->sync(this);
-      _la = _input->LA(1);
-      while (_la == SolParser::T__6) {
-        setState(78);
-        match(SolParser::T__6);
-        setState(79);
-        expression(0);
-        setState(84);
-        _errHandler->sync(this);
-        _la = _input->LA(1);
-      }
-    }
-    setState(87);
-    match(SolParser::T__7);
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
-
   return _localctx;
 }
 

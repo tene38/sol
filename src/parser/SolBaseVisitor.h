@@ -33,15 +33,23 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual std::any visitReturn_statement(SolParser::Return_statementContext *ctx) override {
+  virtual std::any visitReturnStatement(SolParser::ReturnStatementContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual std::any visitExpression(SolParser::ExpressionContext *ctx) override {
+  virtual std::any visitIdentExpr(SolParser::IdentExprContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual std::any visitFunc_call(SolParser::Func_callContext *ctx) override {
+  virtual std::any visitCallExpr(SolParser::CallExprContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual std::any visitIntExpr(SolParser::IntExprContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual std::any visitBinopExpr(SolParser::BinopExprContext *ctx) override {
     return visitChildren(ctx);
   }
 

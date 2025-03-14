@@ -3,8 +3,8 @@
 #include "antlr4-runtime.h"
 #include "parser/SolLexer.h"
 #include "parser/SolParser.h"
-#include "parser/SolBaseListener.h"
-#include "parser/SolBaseVisitor.h"
+#include "ast/AstBuilder.hpp"
+#include "ast/Ast.hpp"
 
 void PrintUsage(std::string programName)
 {
@@ -36,10 +36,15 @@ int main(const int argc, const char *argv[])
     antlr4::tree::ParseTree *tree = parser.program();
 
     std::println("Parsed:");
-    std::println("{}", tree->toStringTree(&parser));
+    std::println("{}", tree->toStringTree(&parser, true));
 
-
+    // TODO: how to print nice compiler error messages?
+    // If there were any errors, exit
+    
     // Build the AST
+    sol::ast::AstBuilder astBuilder;
+    astBuilder.visit(tree);
+    auto ast = std::unique_ptr<sol::ast::AstNode>(std::move(astBuilder.Program));
 
     // Generate the IR
 }

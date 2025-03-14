@@ -333,6 +333,19 @@ arith_binop = '+' (precedence 20)
 func_call = ident '(' [expression (, expression)*] ')'
 ```
 
+The AST for the program above would be:
+
+```
+(program (
+    (procedure add ((x int) (y int)) int (
+        (binop + x y)))
+    (procedure compute ((x int) (y int)) int (
+        (binop * (func_call add (x y)) 
+                 (func_call add (y x)))))))
+
+; Isn't lisp beautiful?
+```
+
 ## Work plan
 
 - [x] Write a rudimentary design spec

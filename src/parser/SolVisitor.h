@@ -28,11 +28,15 @@ public:
 
     virtual std::any visitArg(SolParser::ArgContext *context) = 0;
 
-    virtual std::any visitReturn_statement(SolParser::Return_statementContext *context) = 0;
+    virtual std::any visitReturnStatement(SolParser::ReturnStatementContext *context) = 0;
 
-    virtual std::any visitExpression(SolParser::ExpressionContext *context) = 0;
+    virtual std::any visitIdentExpr(SolParser::IdentExprContext *context) = 0;
 
-    virtual std::any visitFunc_call(SolParser::Func_callContext *context) = 0;
+    virtual std::any visitCallExpr(SolParser::CallExprContext *context) = 0;
+
+    virtual std::any visitIntExpr(SolParser::IntExprContext *context) = 0;
+
+    virtual std::any visitBinopExpr(SolParser::BinopExprContext *context) = 0;
 
 
 };

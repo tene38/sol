@@ -16,6 +16,8 @@ target_sources(solc PRIVATE
     src/parser/SolBaseVisitor.cpp
     src/parser/SolListener.cpp
     src/parser/SolVisitor.cpp
+    src/ast/Ast.cpp
+    src/ast/AstBuilder.cpp
     src/driver.cpp
 )
 

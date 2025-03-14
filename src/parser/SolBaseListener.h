@@ -30,14 +30,20 @@ public:
   virtual void enterArg(SolParser::ArgContext * /*ctx*/) override { }
   virtual void exitArg(SolParser::ArgContext * /*ctx*/) override { }
 
-  virtual void enterReturn_statement(SolParser::Return_statementContext * /*ctx*/) override { }
-  virtual void exitReturn_statement(SolParser::Return_statementContext * /*ctx*/) override { }
+  virtual void enterReturnStatement(SolParser::ReturnStatementContext * /*ctx*/) override { }
+  virtual void exitReturnStatement(SolParser::ReturnStatementContext * /*ctx*/) override { }
 
-  virtual void enterExpression(SolParser::ExpressionContext * /*ctx*/) override { }
-  virtual void exitExpression(SolParser::ExpressionContext * /*ctx*/) override { }
+  virtual void enterIdentExpr(SolParser::IdentExprContext * /*ctx*/) override { }
+  virtual void exitIdentExpr(SolParser::IdentExprContext * /*ctx*/) override { }
 
-  virtual void enterFunc_call(SolParser::Func_callContext * /*ctx*/) override { }
-  virtual void exitFunc_call(SolParser::Func_callContext * /*ctx*/) override { }
+  virtual void enterCallExpr(SolParser::CallExprContext * /*ctx*/) override { }
+  virtual void exitCallExpr(SolParser::CallExprContext * /*ctx*/) override { }
+
+  virtual void enterIntExpr(SolParser::IntExprContext * /*ctx*/) override { }
+  virtual void exitIntExpr(SolParser::IntExprContext * /*ctx*/) override { }
+
+  virtual void enterBinopExpr(SolParser::BinopExprContext * /*ctx*/) override { }
+  virtual void exitBinopExpr(SolParser::BinopExprContext * /*ctx*/) override { }
 
 
   virtual void enterEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }

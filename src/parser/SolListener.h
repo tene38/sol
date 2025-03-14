@@ -28,14 +28,20 @@ public:
   virtual void enterArg(SolParser::ArgContext *ctx) = 0;
   virtual void exitArg(SolParser::ArgContext *ctx) = 0;
 
-  virtual void enterReturn_statement(SolParser::Return_statementContext *ctx) = 0;
-  virtual void exitReturn_statement(SolParser::Return_statementContext *ctx) = 0;
+  virtual void enterReturnStatement(SolParser::ReturnStatementContext *ctx) = 0;
+  virtual void exitReturnStatement(SolParser::ReturnStatementContext *ctx) = 0;
 
-  virtual void enterExpression(SolParser::ExpressionContext *ctx) = 0;
-  virtual void exitExpression(SolParser::ExpressionContext *ctx) = 0;
+  virtual void enterIdentExpr(SolParser::IdentExprContext *ctx) = 0;
+  virtual void exitIdentExpr(SolParser::IdentExprContext *ctx) = 0;
 
-  virtual void enterFunc_call(SolParser::Func_callContext *ctx) = 0;
-  virtual void exitFunc_call(SolParser::Func_callContext *ctx) = 0;
+  virtual void enterCallExpr(SolParser::CallExprContext *ctx) = 0;
+  virtual void exitCallExpr(SolParser::CallExprContext *ctx) = 0;
+
+  virtual void enterIntExpr(SolParser::IntExprContext *ctx) = 0;
+  virtual void exitIntExpr(SolParser::IntExprContext *ctx) = 0;
+
+  virtual void enterBinopExpr(SolParser::BinopExprContext *ctx) = 0;
+  virtual void exitBinopExpr(SolParser::BinopExprContext *ctx) = 0;
 
 
 };
