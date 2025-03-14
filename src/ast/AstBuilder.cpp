@@ -14,6 +14,8 @@ std::any AstBuilder::visitProgram(SolParser::ProgramContext *context)
         visit(proc);
         procs.push_back(std::move(Procedure));
     }
+
+    Program = std::make_unique<ProgramAst>(std::move(procs));
     return 0;
 }
 
@@ -23,7 +25,7 @@ std::any AstBuilder::visitProcedure(SolParser::ProcedureContext *context)
     std::vector<std::string> args;
 
     for (auto &arg : context->args()->arg())
-        args.push_back(arg->getText());
+        args.push_back(arg->IDENT()->getText());
 
     visit(context->returnStatement());
 

@@ -4,6 +4,9 @@
 #include "ast/Ast.hpp"
 #include "ast/AstVisitor.hpp"
 
+// TODO: this file, and the corresponding `Ast.hpp` should be broken up into
+// one file per class.
+
 namespace sol::ast
 {
 
@@ -82,5 +85,64 @@ void ProgramAst::Accept(AstVisitor *visitor)
 }
 
 
+int NumberExprAst::GetVal()
+{
+    return Val;
+}
+
+std::string VariableExprAst::GetName()
+{
+    return Name;
+}
+
+std::string BinaryExprAst::GetOp()
+{
+    return Op;
+}
+
+std::unique_ptr<ExprAst> &BinaryExprAst::GetLHS()
+{
+    return LHS;
+}
+
+std::unique_ptr<ExprAst> &BinaryExprAst::GetRHS()
+{
+    return RHS;
+}
+
+std::string CallExprAst::GetCallee()
+{
+    return Callee;
+}
+
+std::vector<std::unique_ptr<ExprAst>> &CallExprAst::GetArgs()
+{
+    return Args;
+}
+
+std::unique_ptr<ExprAst> &ReturnStatementAst::GetReturnExpression()
+{
+    return ReturnExpression;
+}
+
+std::string ProcedureAst::GetName()
+{
+    return Name;
+}
+
+std::vector<std::string> &ProcedureAst::GetArgs()
+{
+    return Args;
+}
+
+std::unique_ptr<ReturnStatementAst> &ProcedureAst::GetBody()
+{
+    return Body;
+}
+
+std::vector<std::unique_ptr<ProcedureAst>> &ProgramAst::GetProcedures()
+{
+    return Procedures;
+}
 
 } // namespace sol::ast

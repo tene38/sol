@@ -353,8 +353,8 @@ The AST for the program above would be:
 - [x] Write down the language syntax in BNF
 - [x] Generate a parser in ANTLR
 - [x] Read about LLVM IR
-- [ ] Implement an AST
-- [ ] Implement a visitor, which maps the parse tree to the AST
+- [x] Implement an AST
+- [x] Implement a visitor, which maps the parse tree to the AST
 - [ ] Implement a visitor, which maps the AST to LLVM IR
 - [ ] Generate a binary and run it
 
