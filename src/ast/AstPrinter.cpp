@@ -10,11 +10,6 @@ AstPrinter::AstPrinter(std::ostream &out) : Out(out), Depth(0)
 {
 }
 
-void AstPrinter::visit(AstNode *ast) 
-{
-    ast->Accept(this);
-}
-
 std::string AstPrinter::Indent()
 {
     std::string indent;
@@ -26,6 +21,11 @@ std::string AstPrinter::Indent()
 }
 
 void AstPrinter::visit(ExprAst *ast) 
+{
+    ast->Accept(this);
+}
+
+void AstPrinter::visit(AstNode *ast) 
 {
     ast->Accept(this);
 }
@@ -49,7 +49,7 @@ void AstPrinter::visit(BinaryExprAst *ast)
     Depth += 1;
     Out << Indent() << ast->GetOp() << std::endl;
     visit(ast->GetLHS().get());
-    visit(ast->GetLHS().get());
+    visit(ast->GetRHS().get());
     Depth -= 1;
 }
 
