@@ -4,9 +4,25 @@ set(CMAKE_CXX_STANDARD 23)
 
 project(Sol C CXX)
 
+
+# ====================
+# Dependencies
+# ====================
 find_package(antlr4-runtime REQUIRED)
 find_package(LLVM REQUIRED CONFIG)
+find_package(GTest)
+# include(FetchContent)
+# FetchContent_Declare(
+#   googletest
+#   URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+# )
+# set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+# FetchContent_MakeAvailable(googletest)
 
+
+# ====================
+# The `solc` compiler
+# ====================
 add_executable(solc)
 
 target_sources(solc PRIVATE
@@ -40,3 +56,23 @@ target_link_libraries(solc PRIVATE
 target_compile_definitions(solc PRIVATE
     ${LLVM_DEFINITIONS_LIST}
 )
+
+
+# ====================
+# Unit tests
+# ====================
+enable_testing()
+
+# TODO: should the project be divided into static libraries in order to ease
+# testing?
+add_executable(hello_test)
+target_sources(hello_test PRIVATE
+    src/hello_test.cpp
+)
+
+target_link_libraries(hello_test PRIVATE
+    GTest::gtest_main
+)
+
+include(GoogleTest)
+gtest_discover_tests(hello_test)
