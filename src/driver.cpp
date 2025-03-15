@@ -1,3 +1,4 @@
+#include <llvm/Support/raw_ostream.h>
 #include <print>
 #include <iostream>
 
@@ -6,6 +7,7 @@
 #include "parser/SolParser.h"
 #include "ast/AstBuilder.hpp"
 #include "ast/AstPrinter.hpp"
+#include "ir/IRGenerator.hpp"
 #include "ast/Ast.hpp"
 
 void PrintUsage(std::string programName)
@@ -43,16 +45,33 @@ int main(const int argc, const char *argv[])
     // If there were any errors, exit
     if (parser.getNumberOfSyntaxErrors() > 0)
         return -1;
-    
+
     // Build the AST
     sol::ast::AstBuilder astBuilder;
     astBuilder.visit(tree);
-    auto ast = std::unique_ptr<sol::ast::AstNode>(std::move(astBuilder.Program));
+    auto ast =
+        std::unique_ptr<sol::ast::AstNode>(std::move(astBuilder.Program));
 
+    // TODO: AstPrinter is borked. Fix!
     auto astPrinter = sol::ast::AstPrinter(std::cout);
     astPrinter.visit(ast.get());
 
     // Generate the IR
+    auto TheContext = std::make_unique<llvm::LLVMContext>();
+    auto TheModule = std::make_unique<llvm::Module>(argv[1], *TheContext);
+    auto TheBuilder = std::make_unique<llvm::IRBuilder<>>(*TheContext);
+
+    // TODO: all of the classes I defined have default:
+    // 1. Destructors
+    // 2. Copy operations (copy constructor, copy assignment operator)
+    // 3. Move operations (move constructor, move assignment operaotr)
+    // Go over every single one and make sure these operations make sense, or
+    // they're deleted when they're not needed.
+    auto irGenerator = sol::ir::IRGenerator(TheContext.get(), TheBuilder.get(),
+                                            TheModule.get());
+    irGenerator.visit(ast.get());
+
+    TheModule->print(llvm::errs(), nullptr);
 
     // Generate the binary
 }

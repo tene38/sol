@@ -19,6 +19,7 @@ target_sources(solc PRIVATE
     src/ast/Ast.cpp
     src/ast/AstBuilder.cpp
     src/ast/AstPrinter.cpp
+    src/ir/IRGenerator.cpp
     src/driver.cpp
 )
 

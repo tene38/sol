@@ -355,7 +355,7 @@ The AST for the program above would be:
 - [x] Read about LLVM IR
 - [x] Implement an AST
 - [x] Implement a visitor, which maps the parse tree to the AST
-- [ ] Implement a visitor, which maps the AST to LLVM IR
+- [x] Implement a visitor, which maps the AST to LLVM IR
 - [ ] Generate a binary and run it
 
 - Think about a domain specific language and write one.
