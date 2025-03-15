@@ -17,6 +17,7 @@ class AstPrinter : public AstVisitor
     std::string Indent();
 
   public:
+    void visit(AstNode *ast) override;
     void visit(ExprAst *ast) override;
     void visit(NumberExprAst *ast) override;
     void visit(VariableExprAst *ast) override;

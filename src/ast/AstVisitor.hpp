@@ -8,6 +8,7 @@ namespace sol::ast
 class AstVisitor
 {
   public:
+    virtual void visit(AstNode *ast) = 0;
     virtual void visit(ExprAst *ast) = 0;
     virtual void visit(NumberExprAst *ast) = 0;
     virtual void visit(VariableExprAst *ast) = 0;

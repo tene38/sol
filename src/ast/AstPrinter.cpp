@@ -10,6 +10,11 @@ AstPrinter::AstPrinter(std::ostream &out) : Out(out), Depth(0)
 {
 }
 
+void AstPrinter::visit(AstNode *ast) 
+{
+    ast->Accept(this);
+}
+
 std::string AstPrinter::Indent()
 {
     std::string indent;

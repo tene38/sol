@@ -50,7 +50,7 @@ int main(const int argc, const char *argv[])
     auto ast = std::unique_ptr<sol::ast::AstNode>(std::move(astBuilder.Program));
 
     auto astPrinter = sol::ast::AstPrinter(std::cout);
-    ast->Accept(&astPrinter);
+    astPrinter.visit(ast.get());
 
     // Generate the IR
 
