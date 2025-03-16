@@ -356,7 +356,8 @@ The AST for the program above would be:
 - [x] Implement an AST
 - [x] Implement a visitor, which maps the parse tree to the AST
 - [x] Implement a visitor, which maps the AST to LLVM IR
-- [ ] Use the LLVM API to output a compiled file
+- [x] Use the LLVM API to output a compiled file
+- [ ] Use the lld API to link output object files into an ELF
 - [ ] Define invariants of all classes explicitly. Write unit tests to verify
       them.
 - [ ] Push the code into a repo, setup CI/CD with automatic testing

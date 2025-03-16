@@ -1,6 +1,14 @@
-#include <llvm/Support/raw_ostream.h>
 #include <print>
 #include <iostream>
+
+#include "llvm/Target/TargetMachine.h"
+#include "llvm/Target/TargetOptions.h"
+#include "llvm/TargetParser/Host.h"
+#include "llvm/Support/raw_ostream.h"
+#include "llvm/Support/TargetSelect.h"
+#include "llvm/Support/FileSystem.h"
+#include "llvm/MC/TargetRegistry.h"
+#include "llvm/IR/LegacyPassManager.h"
 
 #include "antlr4-runtime.h"
 #include "parser/SolLexer.h"
@@ -73,4 +81,49 @@ int main(const int argc, const char *argv[])
     TheModule->print(llvm::errs(), nullptr);
 
     // Generate the binary
+    auto targetTriple = llvm::sys::getDefaultTargetTriple();
+
+    llvm::InitializeAllTargetInfos();
+    llvm::InitializeAllTargets();
+    llvm::InitializeAllTargetMCs();
+    llvm::InitializeAllAsmParsers();
+    llvm::InitializeAllAsmPrinters();
+
+    std::string error;
+    auto target = llvm::TargetRegistry::lookupTarget(targetTriple, error);
+
+    if (!target) {
+        llvm::errs() << error;
+        return 1;
+    }
+
+    auto cpu = "generic";
+    auto features = "";
+    llvm::TargetOptions opt;
+
+    auto targetMachine = target->createTargetMachine(
+        targetTriple, cpu, features, opt, llvm::Reloc::PIC_);
+
+    TheModule->setDataLayout(targetMachine->createDataLayout());
+    TheModule->setTargetTriple(targetTriple);
+
+    auto filename = "out.o";
+    std::error_code EC;
+    llvm::raw_fd_ostream dest(filename, EC, llvm::sys::fs::OF_None);
+
+    if (EC) {
+        llvm::errs() << "Could not open file: " << EC.message();
+        return 1;
+    }
+
+    llvm::legacy::PassManager pass;
+    auto FileType = llvm::CodeGenFileType::ObjectFile;
+
+    if (targetMachine->addPassesToEmitFile(pass, dest, nullptr, FileType)) {
+        llvm::errs() << "TargetMachine can't emit a file of this type";
+        return 1;
+    }
+
+    pass.run(*TheModule);
+    dest.flush();
 }
