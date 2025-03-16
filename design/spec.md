@@ -356,7 +356,23 @@ The AST for the program above would be:
 - [x] Implement an AST
 - [x] Implement a visitor, which maps the parse tree to the AST
 - [x] Implement a visitor, which maps the AST to LLVM IR
-- [ ] Generate a binary and run it
+- [ ] Use the LLVM API to output a compiled file
+- [ ] Define invariants of all classes explicitly. Write unit tests to verify
+      them.
+- [ ] Push the code into a repo, setup CI/CD with automatic testing
+- [ ] Make the project run with Conan packages
+- [ ] Add running optimization passes on the IR
+- [ ] Extend the language by:
+    - [ ] variables
+    - [ ] conditional expressions
+    - [ ] builtin datatypes
+    - [ ] all operators in expressions
+    - [ ] external functions
+- [ ] Make AstPrinter print S-expressions
+- [ ] Pick sensible naming conventions
+- [ ] Read the ISO C++ core guidelines
+- [ ] Think how to implement a compiler frontend in Coq (using a representation
+      for the parse tree, AST and LLVM IR, IR from Vellvm)
 
 - Think about a domain specific language and write one.
 - Read about dependent type systems. Can one be implemented in a language with

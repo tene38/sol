@@ -52,7 +52,6 @@ int main(const int argc, const char *argv[])
     auto ast =
         std::unique_ptr<sol::ast::AstNode>(std::move(astBuilder.Program));
 
-    // TODO: AstPrinter is borked. Fix!
     auto astPrinter = sol::ast::AstPrinter(std::cout);
     astPrinter.visit(ast.get());
 
