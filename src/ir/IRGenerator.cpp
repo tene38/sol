@@ -114,5 +114,14 @@ void IRGenerator::visit(ast::ProgramAst *ast)
         visit(proc.get());
 }
 
+llvm::Value *IRGenerator::GetVal()
+{
+    return Val;
+}
+
+std::map<std::string, llvm::Value *> &IRGenerator::GetVariables()
+{
+    return NamedVariables;
+}
 
 } // namespace sol::ir

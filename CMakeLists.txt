@@ -65,14 +65,31 @@ enable_testing()
 
 # TODO: should the project be divided into static libraries in order to ease
 # testing?
-add_executable(hello_test)
-target_sources(hello_test PRIVATE
-    src/hello_test.cpp
+add_executable(tests)
+target_sources(tests PRIVATE
+    src/parser/SolLexer.cpp
+    src/parser/SolParser.cpp
+    src/parser/SolBaseListener.cpp
+    src/parser/SolBaseVisitor.cpp
+    src/parser/SolListener.cpp
+    src/parser/SolVisitor.cpp
+    src/ast/Ast.cpp
+    src/ast/AstBuilder.cpp
+    src/ast/AstPrinter.cpp
+    src/ir/IRGenerator.cpp
+    src/test.cpp
 )
 
-target_link_libraries(hello_test PRIVATE
+target_include_directories(tests PRIVATE 
+    ${LLVM_INCLUDE_DIRS}
+    src
+)
+
+llvm_config(tests USE_SHARED core)
+target_link_libraries(tests PRIVATE
     GTest::gtest_main
+    antlr4_static
 )
 
 include(GoogleTest)
-gtest_discover_tests(hello_test)
+gtest_discover_tests(tests)

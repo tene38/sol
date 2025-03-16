@@ -38,6 +38,9 @@ class IRGenerator : public ast::AstVisitor
     void visit(ast::ReturnStatementAst *ast) override;
     void visit(ast::ProcedureAst *ast) override;
     void visit(ast::ProgramAst *ast) override;
+
+    llvm::Value *GetVal();
+    std::map<std::string, llvm::Value *> &GetVariables();
 };
 
 } // namespace sol::ir
