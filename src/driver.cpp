@@ -1,5 +1,6 @@
 #include <print>
 #include <iostream>
+#include <filesystem>
 
 #include "llvm/Target/TargetMachine.h"
 #include "llvm/Target/TargetOptions.h"
@@ -18,6 +19,9 @@
 #include "ir/IRGenerator.hpp"
 #include "ast/Ast.hpp"
 
+
+namespace fs = std::filesystem;
+
 void PrintUsage(std::string programName)
 {
     std::println("Usage: {} <input_file>", programName);
@@ -34,10 +38,11 @@ int main(const int argc, const char *argv[])
         return -1;
     }
 
-    std::println("Compiling {}.", argv[1]);
+    fs::path inputFile(argv[1]);
+    std::println("Compiling {}.", inputFile.string());
 
     // Run the parser
-    std::ifstream inputFileStream(argv[1]);
+    std::ifstream inputFileStream(inputFile.string());
 
     antlr4::ANTLRInputStream inputStream(inputFileStream);
 
@@ -64,8 +69,9 @@ int main(const int argc, const char *argv[])
     astPrinter.visit(ast.get());
 
     // Generate the IR
+    auto moduleName = inputFile.filename().string();
     auto TheContext = std::make_unique<llvm::LLVMContext>();
-    auto TheModule = std::make_unique<llvm::Module>(argv[1], *TheContext);
+    auto TheModule = std::make_unique<llvm::Module>(moduleName, *TheContext);
     auto TheBuilder = std::make_unique<llvm::IRBuilder<>>(*TheContext);
 
     // TODO: all of the classes I defined have default:
@@ -107,9 +113,9 @@ int main(const int argc, const char *argv[])
     TheModule->setDataLayout(targetMachine->createDataLayout());
     TheModule->setTargetTriple(targetTriple);
 
-    auto filename = "out.o";
+    auto outputFile = inputFile.filename().replace_extension(".o");
     std::error_code EC;
-    llvm::raw_fd_ostream dest(filename, EC, llvm::sys::fs::OF_None);
+    llvm::raw_fd_ostream dest(outputFile.string(), EC, llvm::sys::fs::OF_None);
 
     if (EC) {
         llvm::errs() << "Could not open file: " << EC.message();
