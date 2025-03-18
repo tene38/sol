@@ -8,6 +8,7 @@
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/Support/TargetSelect.h"
 #include "llvm/Support/FileSystem.h"
+#include "llvm/Support/CommandLine.h"
 #include "llvm/MC/TargetRegistry.h"
 #include "llvm/IR/LegacyPassManager.h"
 
@@ -21,25 +22,26 @@
 
 
 namespace fs = std::filesystem;
+namespace cl = llvm::cl;
 
-void PrintUsage(std::string programName)
-{
-    std::println("Usage: {} <input_file>", programName);
-    std::println("Where:");
-    std::println("    - <input_file>: .sol file to compile");
-}
+// Commandline options
+cl::opt<std::string> OutputFilename("o", cl::desc("Specify output filename"),
+                                    cl::value_desc("filename"));
+cl::opt<std::string> InputFilename(cl::Positional, cl::Required,
+                                   cl::desc("<input file>"));
+cl::opt<bool> Verbose("v", cl::desc("Enable verbose output"));
+cl::opt<bool> Debug("g", cl::desc("Build with debug information (unimplemented yet)"));
 
 int main(const int argc, const char *argv[])
 {
-
     // Check commandline arguments
-    if (argc != 2) {
-        PrintUsage(argv[0]);
-        return -1;
-    }
+    cl::ParseCommandLineOptions(argc, argv);
 
-    fs::path inputFile(argv[1]);
-    std::println("Compiling {}.", inputFile.string());
+    fs::path inputFile(InputFilename.c_str());
+
+    if (Verbose) {
+        std::println("Compiling {}.", inputFile.string());
+    }
 
     // Run the parser
     std::ifstream inputFileStream(inputFile.string());
@@ -52,8 +54,10 @@ int main(const int argc, const char *argv[])
 
     antlr4::tree::ParseTree *tree = parser.program();
 
-    std::println("Parsed:");
-    std::println("{}", tree->toStringTree(&parser, true));
+    if (Verbose) {
+        std::println("Parsed:");
+        std::println("{}", tree->toStringTree(&parser, true));
+    }
 
     // If there were any errors, exit
     if (parser.getNumberOfSyntaxErrors() > 0)
@@ -65,8 +69,10 @@ int main(const int argc, const char *argv[])
     auto ast =
         std::unique_ptr<sol::ast::AstNode>(std::move(astBuilder.Program));
 
-    auto astPrinter = sol::ast::AstPrinter(std::cout);
-    astPrinter.visit(ast.get());
+    if (Verbose) {
+        auto astPrinter = sol::ast::AstPrinter(std::cout);
+        astPrinter.visit(ast.get());
+    }
 
     // Generate the IR
     auto moduleName = inputFile.filename().string();
@@ -84,7 +90,9 @@ int main(const int argc, const char *argv[])
                                             TheModule.get());
     irGenerator.visit(ast.get());
 
-    TheModule->print(llvm::errs(), nullptr);
+    if (Verbose) {
+        TheModule->print(llvm::errs(), nullptr);
+    }
 
     // Generate the binary
     auto targetTriple = llvm::sys::getDefaultTargetTriple();
@@ -113,9 +121,14 @@ int main(const int argc, const char *argv[])
     TheModule->setDataLayout(targetMachine->createDataLayout());
     TheModule->setTargetTriple(targetTriple);
 
-    auto outputFile = inputFile.filename().replace_extension(".o");
+    std::string outputFile;
+    if (OutputFilename.getNumOccurrences() != 0) {
+        outputFile = OutputFilename.c_str();
+    } else {
+        outputFile = inputFile.filename().replace_extension(".o");
+    }
     std::error_code EC;
-    llvm::raw_fd_ostream dest(outputFile.string(), EC, llvm::sys::fs::OF_None);
+    llvm::raw_fd_ostream dest(outputFile, EC, llvm::sys::fs::OF_None);
 
     if (EC) {
         llvm::errs() << "Could not open file: " << EC.message();
