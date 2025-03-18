@@ -357,9 +357,14 @@ The AST for the program above would be:
 - [x] Implement a visitor, which maps the parse tree to the AST
 - [x] Implement a visitor, which maps the AST to LLVM IR
 - [x] Use the LLVM API to output a compiled file
-- [ ] Use the lld API to link output object files into an ELF
+- [x] Use the lld API to link output object files into an ELF
+    - [x] Just invoke clang instead.
+    - [ ] Implement your own language runtime (analgue for the `crt1.o`,
+        `crti.o` and so on files), then invoke the linker directly.
 - [ ] Define invariants of all classes explicitly. Write unit tests to verify
       them.
+- [ ] Make AstPrinter print S-expressions
+- [ ] Add a .clang-format file, and add constant naming conventions
 - [ ] Push the code into a repo, setup CI/CD with automatic testing
 - [ ] Make the project run with Conan packages
 - [ ] Add running optimization passes on the IR
@@ -369,7 +374,6 @@ The AST for the program above would be:
     - [ ] builtin datatypes
     - [ ] all operators in expressions
     - [ ] external functions
-- [ ] Make AstPrinter print S-expressions
 - [ ] Pick sensible naming conventions
 - [ ] Read the ISO C++ core guidelines
 - [ ] Think how to implement a compiler frontend in Coq (using a representation
