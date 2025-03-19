@@ -6,89 +6,89 @@
 namespace sol::ast
 {
 
-AstPrinter::AstPrinter(std::ostream &out) : Out(out), Depth(0)
+AstPrinter::AstPrinter(std::ostream &Out) : Out(Out), Depth(0)
 {
 }
 
-std::string AstPrinter::Indent()
+std::string AstPrinter::indent()
 {
     std::string indent;
 
-    int numSpaces = Depth * Shift;
+    int numSpaces = Depth * SHIFT;
     while (numSpaces-- > 0)
         indent += " ";
     return indent;
 }
 
-void AstPrinter::visit(ExprAst *ast) 
+void AstPrinter::visit(ExprAst *Ast)
 {
-    ast->Accept(this);
+    Ast->accept(this);
 }
 
-void AstPrinter::visit(AstNode *ast) 
+void AstPrinter::visit(AstNode *Ast)
 {
-    ast->Accept(this);
+    Ast->accept(this);
 }
 
-void AstPrinter::visit(NumberExprAst *ast)
+void AstPrinter::visit(NumberExprAst *Ast)
 {
     Depth += 1;
-    Out << Indent() << ast->GetVal() << std::endl;
+    Out << indent() << Ast->getVal() << std::endl;
     Depth -= 1;
 }
 
-void AstPrinter::visit(VariableExprAst *ast)
+void AstPrinter::visit(VariableExprAst *Ast)
 {
     Depth += 1;
-    Out << Indent() << ast->GetName() << std::endl;
+    Out << indent() << Ast->getName() << std::endl;
     Depth -= 1;
 }
 
-void AstPrinter::visit(BinaryExprAst *ast)
+void AstPrinter::visit(BinaryExprAst *Ast)
 {
     Depth += 1;
-    Out << Indent() << ast->GetOp() << std::endl;
-    visit(ast->GetLHS().get());
-    visit(ast->GetRHS().get());
+    Out << indent() << Ast->getOp() << std::endl;
+    visit(Ast->getLHS().get());
+    visit(Ast->getRHS().get());
     Depth -= 1;
 }
 
-void AstPrinter::visit(CallExprAst *ast)
+void AstPrinter::visit(CallExprAst *Ast)
 {
     Depth += 1;
-    Out << Indent() << ast->GetCallee() << std::endl;
-    for (auto &arg : ast->GetArgs())
+    Out << indent() << Ast->getCallee() << std::endl;
+    for (auto &arg : Ast->getArgs())
         visit(arg.get());
     Depth -= 1;
 }
 
-void AstPrinter::visit(ReturnStatementAst *ast)
+void AstPrinter::visit(ReturnStatementAst *Ast)
 {
     Depth += 1;
     Out << "return" << std::endl;
-    visit(ast->GetReturnExpression().get());
+    visit(Ast->getReturnExpression().get());
     Depth -= 1;
 }
 
-void AstPrinter::visit(ProcedureAst *ast)
+void AstPrinter::visit(ProcedureAst *Ast)
 {
     Depth += 1;
-    Out << "procedure " << ast->GetName() << "(";
-    auto &args = ast->GetArgs();
-    for (int size = args.size(), i = 0; i < size; ++i) {
-        Out << args[i];
-        if (i != size - 1)
+    Out << "procedure " << Ast->getName() << "(";
+    auto &Args = Ast->getArgs();
+    for (int Size = Args.size(), i = 0; i < Size; ++i) {
+        Out << Args[i];
+        if (i != Size - 1)
             Out << ", ";
     }
     Out << ")" << std::endl;
-    visit(ast->GetBody().get());
+    visit(Ast->getBody().get());
     Depth -= 1;
 }
 
-void AstPrinter::visit(ProgramAst *ast)
+void AstPrinter::visit(ProgramAst *Ast)
 {
-    for (auto &proc : ast->GetProcedures())
-        visit(proc.get());
+    for (auto &Proc : Ast->getProcedures())
+        visit(Proc.get());
 }
 
 } // namespace sol::ast

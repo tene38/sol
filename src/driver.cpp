@@ -12,14 +12,13 @@
 #include "llvm/Support/CommandLine.h"
 #include "llvm/MC/TargetRegistry.h"
 #include "llvm/IR/LegacyPassManager.h"
-/* #include "lld/Driver/Common.h" */
 
 #include "antlr4-runtime.h"
 #include "parser/SolLexer.h"
 #include "parser/SolParser.h"
 #include "ast/AstBuilder.hpp"
 #include "ast/AstPrinter.hpp"
-#include "ir/IRGenerator.hpp"
+#include "ir/IrGenerator.hpp"
 #include "ast/Ast.hpp"
 
 
@@ -87,7 +86,7 @@ int main(const int argc, const char *argv[])
     // 3. Move operations (move constructor, move assignment operaotr)
     // Go over every single one and make sure these operations make sense, or
     // they're deleted when they're not needed.
-    auto IrGenerator = sol::ir::IRGenerator(TheContext.get(), TheBuilder.get(),
+    auto IrGenerator = sol::ir::IrGenerator(TheContext.get(), TheBuilder.get(),
                                             TheModule.get());
     IrGenerator.visit(Ast.get());
 

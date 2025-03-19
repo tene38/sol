@@ -12,7 +12,7 @@ class AstVisitor;
 class AstNode
 {
   public:
-    virtual void Accept(AstVisitor *visitor) = 0;
+    virtual void accept(AstVisitor *Visitor) = 0;
     virtual ~AstNode() = default;
 };
 
@@ -26,8 +26,8 @@ class NumberExprAst : public ExprAst
 
   public:
     NumberExprAst(int Val);
-    int GetVal();
-    void Accept(AstVisitor *visitor);
+    int getVal();
+    void accept(AstVisitor *Visitor);
 };
 
 class VariableExprAst : public ExprAst
@@ -36,8 +36,8 @@ class VariableExprAst : public ExprAst
 
   public:
     VariableExprAst(const std::string &Name);
-    std::string GetName();
-    void Accept(AstVisitor *visitor);
+    std::string getName();
+    void accept(AstVisitor *Visitor);
 };
 
 class BinaryExprAst : public ExprAst
@@ -48,10 +48,10 @@ class BinaryExprAst : public ExprAst
   public:
     BinaryExprAst(const std::string &Op, std::unique_ptr<ExprAst> LHS,
                   std::unique_ptr<ExprAst> RHS);
-    std::string GetOp();
-    std::unique_ptr<ExprAst> &GetLHS();
-    std::unique_ptr<ExprAst> &GetRHS();
-    void Accept(AstVisitor *visitor);
+    std::string getOp();
+    std::unique_ptr<ExprAst> &getLHS();
+    std::unique_ptr<ExprAst> &getRHS();
+    void accept(AstVisitor *Visitor);
 };
 
 class CallExprAst : public ExprAst
@@ -62,9 +62,9 @@ class CallExprAst : public ExprAst
   public:
     CallExprAst(const std::string &Callee,
                 std::vector<std::unique_ptr<ExprAst>> Args);
-    std::string GetCallee();
-    std::vector<std::unique_ptr<ExprAst>> &GetArgs();
-    void Accept(AstVisitor *visitor);
+    std::string getCallee();
+    std::vector<std::unique_ptr<ExprAst>> &getArgs();
+    void accept(AstVisitor *Visitor);
 };
 
 class ReturnStatementAst : public AstNode
@@ -73,8 +73,8 @@ class ReturnStatementAst : public AstNode
 
   public:
     ReturnStatementAst(std::unique_ptr<ExprAst> ReturnExpr);
-    std::unique_ptr<ExprAst> &GetReturnExpression();
-    void Accept(AstVisitor *visitor);
+    std::unique_ptr<ExprAst> &getReturnExpression();
+    void accept(AstVisitor *Visitor);
 };
 
 class ProcedureAst : public AstNode
@@ -86,10 +86,10 @@ class ProcedureAst : public AstNode
   public:
     ProcedureAst(const std::string &Name, std::vector<std::string> &Args,
                  std::unique_ptr<ReturnStatementAst> Body);
-    std::string GetName();
-    std::vector<std::string> &GetArgs();
-    std::unique_ptr<ReturnStatementAst> &GetBody();
-    void Accept(AstVisitor *visitor);
+    std::string getName();
+    std::vector<std::string> &getArgs();
+    std::unique_ptr<ReturnStatementAst> &getBody();
+    void accept(AstVisitor *Visitor);
 };
 
 class ProgramAst : public AstNode
@@ -98,8 +98,8 @@ class ProgramAst : public AstNode
 
   public:
     ProgramAst(std::vector<std::unique_ptr<ProcedureAst>> Procedures);
-    std::vector<std::unique_ptr<ProcedureAst>> &GetProcedures();
-    void Accept(AstVisitor *visitor);
+    std::vector<std::unique_ptr<ProcedureAst>> &getProcedures();
+    void accept(AstVisitor *Visitor);
 };
 
 } // namespace sol::ast

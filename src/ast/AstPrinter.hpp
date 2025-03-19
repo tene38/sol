@@ -11,23 +11,23 @@ class AstPrinter : public AstVisitor
 {
     // TODO: make this print proper S-exprs.
     std::ostream &Out;
-    const int Shift = 4;
+    const int SHIFT = 4;
     int Depth;
 
-    std::string Indent();
+    std::string indent();
 
   public:
-    void visit(AstNode *ast) override;
-    void visit(ExprAst *ast) override;
-    void visit(NumberExprAst *ast) override;
-    void visit(VariableExprAst *ast) override;
-    void visit(BinaryExprAst *ast) override;
-    void visit(CallExprAst *ast) override;
-    void visit(ReturnStatementAst *ast) override;
-    void visit(ProcedureAst *ast) override;
-    void visit(ProgramAst *ast) override;
+    void visit(AstNode *Ast) override;
+    void visit(ExprAst *Ast) override;
+    void visit(NumberExprAst *Ast) override;
+    void visit(VariableExprAst *Ast) override;
+    void visit(BinaryExprAst *Ast) override;
+    void visit(CallExprAst *Ast) override;
+    void visit(ReturnStatementAst *Ast) override;
+    void visit(ProcedureAst *Ast) override;
+    void visit(ProgramAst *Ast) override;
 
-    AstPrinter(std::ostream &out);
+    AstPrinter(std::ostream &Out);
 };
 
 } // namespace sol::ast

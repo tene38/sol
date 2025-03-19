@@ -49,98 +49,98 @@ ProgramAst::ProgramAst(std::vector<std::unique_ptr<ProcedureAst>> Procedures)
 }
 
 
-void NumberExprAst::Accept(AstVisitor *visitor)
+void NumberExprAst::accept(AstVisitor *Visitor)
 {
-    visitor->visit(this);
+    Visitor->visit(this);
 }
 
-void VariableExprAst::Accept(AstVisitor *visitor)
+void VariableExprAst::accept(AstVisitor *Visitor)
 {
-    visitor->visit(this);
+    Visitor->visit(this);
 }
 
-void BinaryExprAst::Accept(AstVisitor *visitor)
+void BinaryExprAst::accept(AstVisitor *Visitor)
 {
-    visitor->visit(this);
+    Visitor->visit(this);
 }
 
-void CallExprAst::Accept(AstVisitor *visitor)
+void CallExprAst::accept(AstVisitor *Visitor)
 {
-    visitor->visit(this);
+    Visitor->visit(this);
 }
 
-void ReturnStatementAst::Accept(AstVisitor *visitor)
+void ReturnStatementAst::accept(AstVisitor *Visitor)
 {
-    visitor->visit(this);
+    Visitor->visit(this);
 }
 
-void ProcedureAst::Accept(AstVisitor *visitor)
+void ProcedureAst::accept(AstVisitor *Visitor)
 {
-    visitor->visit(this);
+    Visitor->visit(this);
 }
 
-void ProgramAst::Accept(AstVisitor *visitor)
+void ProgramAst::accept(AstVisitor *Visitor)
 {
-    visitor->visit(this);
+    Visitor->visit(this);
 }
 
 
-int NumberExprAst::GetVal()
+int NumberExprAst::getVal()
 {
     return Val;
 }
 
-std::string VariableExprAst::GetName()
+std::string VariableExprAst::getName()
 {
     return Name;
 }
 
-std::string BinaryExprAst::GetOp()
+std::string BinaryExprAst::getOp()
 {
     return Op;
 }
 
-std::unique_ptr<ExprAst> &BinaryExprAst::GetLHS()
+std::unique_ptr<ExprAst> &BinaryExprAst::getLHS()
 {
     return LHS;
 }
 
-std::unique_ptr<ExprAst> &BinaryExprAst::GetRHS()
+std::unique_ptr<ExprAst> &BinaryExprAst::getRHS()
 {
     return RHS;
 }
 
-std::string CallExprAst::GetCallee()
+std::string CallExprAst::getCallee()
 {
     return Callee;
 }
 
-std::vector<std::unique_ptr<ExprAst>> &CallExprAst::GetArgs()
+std::vector<std::unique_ptr<ExprAst>> &CallExprAst::getArgs()
 {
     return Args;
 }
 
-std::unique_ptr<ExprAst> &ReturnStatementAst::GetReturnExpression()
+std::unique_ptr<ExprAst> &ReturnStatementAst::getReturnExpression()
 {
     return ReturnExpression;
 }
 
-std::string ProcedureAst::GetName()
+std::string ProcedureAst::getName()
 {
     return Name;
 }
 
-std::vector<std::string> &ProcedureAst::GetArgs()
+std::vector<std::string> &ProcedureAst::getArgs()
 {
     return Args;
 }
 
-std::unique_ptr<ReturnStatementAst> &ProcedureAst::GetBody()
+std::unique_ptr<ReturnStatementAst> &ProcedureAst::getBody()
 {
     return Body;
 }
 
-std::vector<std::unique_ptr<ProcedureAst>> &ProgramAst::GetProcedures()
+std::vector<std::unique_ptr<ProcedureAst>> &ProgramAst::getProcedures()
 {
     return Procedures;
 }

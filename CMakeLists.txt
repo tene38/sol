@@ -35,7 +35,7 @@ target_sources(solc PRIVATE
     src/ast/Ast.cpp
     src/ast/AstBuilder.cpp
     src/ast/AstPrinter.cpp
-    src/ir/IRGenerator.cpp
+    src/ir/IrGenerator.cpp
     src/driver.cpp
 )
 
@@ -76,7 +76,7 @@ target_sources(tests PRIVATE
     src/ast/Ast.cpp
     src/ast/AstBuilder.cpp
     src/ast/AstPrinter.cpp
-    src/ir/IRGenerator.cpp
+    src/ir/IrGenerator.cpp
     src/test.cpp
 )
 
