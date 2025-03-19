@@ -6,9 +6,7 @@
 namespace sol::ast
 {
 
-AstPrinter::AstPrinter(std::ostream &Out) : Out(Out), Depth(0)
-{
-}
+AstPrinter::AstPrinter(std::ostream &Out) : Out(Out), Depth(0) {}
 
 std::string AstPrinter::indent()
 {

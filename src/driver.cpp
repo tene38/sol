@@ -1,25 +1,25 @@
-#include <print>
 #include <cstdlib>
-#include <iostream>
 #include <filesystem>
+#include <iostream>
+#include <print>
 
+#include "llvm/IR/LegacyPassManager.h"
+#include "llvm/MC/TargetRegistry.h"
+#include "llvm/Support/CommandLine.h"
+#include "llvm/Support/FileSystem.h"
+#include "llvm/Support/raw_ostream.h"
+#include "llvm/Support/TargetSelect.h"
 #include "llvm/Target/TargetMachine.h"
 #include "llvm/Target/TargetOptions.h"
 #include "llvm/TargetParser/Host.h"
-#include "llvm/Support/raw_ostream.h"
-#include "llvm/Support/TargetSelect.h"
-#include "llvm/Support/FileSystem.h"
-#include "llvm/Support/CommandLine.h"
-#include "llvm/MC/TargetRegistry.h"
-#include "llvm/IR/LegacyPassManager.h"
 
 #include "antlr4-runtime.h"
-#include "parser/SolLexer.h"
-#include "parser/SolParser.h"
+#include "ast/Ast.hpp"
 #include "ast/AstBuilder.hpp"
 #include "ast/AstPrinter.hpp"
 #include "ir/IrGenerator.hpp"
-#include "ast/Ast.hpp"
+#include "parser/SolLexer.h"
+#include "parser/SolParser.h"
 
 
 namespace fs = std::filesystem;
@@ -31,7 +31,8 @@ cl::opt<std::string> OutputFilename("o", cl::desc("Specify output filename"),
 cl::opt<std::string> InputFilename(cl::Positional, cl::Required,
                                    cl::desc("<input file>"));
 cl::opt<bool> Verbose("v", cl::desc("Enable verbose output"));
-cl::opt<bool> Debug("g", cl::desc("Build with debug information (unimplemented yet)"));
+cl::opt<bool>
+    Debug("g", cl::desc("Build with debug information (unimplemented yet)"));
 
 int main(const int argc, const char *argv[])
 {
@@ -121,9 +122,11 @@ int main(const int argc, const char *argv[])
     TheModule->setDataLayout(TargetMachine->createDataLayout());
     TheModule->setTargetTriple(TargetTriple);
 
-    std::string ObjectFilename = InputFilePath.filename().replace_extension(".o");
+    std::string ObjectFilename =
+        InputFilePath.filename().replace_extension(".o");
     std::error_code EC;
-    llvm::raw_fd_ostream ObjectOutputStream(ObjectFilename, EC, llvm::sys::fs::OF_None);
+    llvm::raw_fd_ostream ObjectOutputStream(ObjectFilename, EC,
+                                            llvm::sys::fs::OF_None);
 
     if (EC) {
         llvm::errs() << "Could not open file: " << EC.message();
@@ -133,7 +136,8 @@ int main(const int argc, const char *argv[])
     llvm::legacy::PassManager Pass;
     auto FileType = llvm::CodeGenFileType::ObjectFile;
 
-    if (TargetMachine->addPassesToEmitFile(Pass, ObjectOutputStream, nullptr, FileType)) {
+    if (TargetMachine->addPassesToEmitFile(Pass, ObjectOutputStream, nullptr,
+                                           FileType)) {
         llvm::errs() << "TargetMachine can't emit a file of this type";
         return 1;
     }
@@ -151,7 +155,8 @@ int main(const int argc, const char *argv[])
     else
         ExecutableFilename = InputFilePath.filename().replace_extension("");
 
-    auto ClangCommandline = std::format("clang -o {} {}", ExecutableFilename, ObjectFilename);
+    auto ClangCommandline =
+        std::format("clang -o {} {}", ExecutableFilename, ObjectFilename);
 
     if (Verbose) {
         std::println("Invoking: `{}`", ClangCommandline);

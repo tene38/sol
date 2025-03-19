@@ -3,8 +3,8 @@
 #include <memory>
 
 #include "antlr4-runtime.h"
-#include "parser/SolBaseVisitor.h"
 #include "ast/Ast.hpp"
+#include "parser/SolBaseVisitor.h"
 
 namespace sol::ast
 {

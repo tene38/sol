@@ -1,7 +1,7 @@
+#include "llvm/IR/Argument.h"
 #include <gtest/gtest.h>
 #include <llvm/IR/Constant.h>
 #include <llvm/IR/Constants.h>
-#include "llvm/IR/Argument.h"
 
 #include "ast/Ast.hpp"
 #include "ast/AstBuilder.hpp"

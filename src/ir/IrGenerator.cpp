@@ -99,7 +99,8 @@ void IrGenerator::visit(ast::ProcedureAst *Ast)
         NamedVariables[std::string(Arg.getName())] = &Arg;
 
     // Create a block, set the builder to insert into it
-    llvm::BasicBlock *FunctionBody = llvm::BasicBlock::Create(*TheContext, "entry", Function);
+    llvm::BasicBlock *FunctionBody =
+        llvm::BasicBlock::Create(*TheContext, "entry", Function);
     TheBuilder->SetInsertPoint(FunctionBody);
 
     // Recurse into the rest of the function

@@ -361,10 +361,10 @@ The AST for the program above would be:
     - [x] Just invoke clang instead.
     - [ ] Implement your own language runtime (analgue for the `crt1.o`,
         `crti.o` and so on files), then invoke the linker directly.
+- [x] Add a .clang-format file, and add constant naming conventions
 - [ ] Define invariants of all classes explicitly. Write unit tests to verify
       them.
 - [ ] Make AstPrinter print S-expressions
-- [ ] Add a .clang-format file, and add constant naming conventions
 - [ ] Push the code into a repo, setup CI/CD with automatic testing
 - [ ] Make the project run with Conan packages
 - [ ] Add running optimization passes on the IR

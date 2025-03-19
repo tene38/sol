@@ -1,5 +1,5 @@
-#include <vector>
 #include <string>
+#include <vector>
 
 #include "ast/Ast.hpp"
 #include "ast/AstVisitor.hpp"
@@ -10,13 +10,9 @@
 namespace sol::ast
 {
 
-NumberExprAst::NumberExprAst(int Val) : Val(Val)
-{
-}
+NumberExprAst::NumberExprAst(int Val) : Val(Val) {}
 
-VariableExprAst::VariableExprAst(const std::string &Name) : Name(Name)
-{
-}
+VariableExprAst::VariableExprAst(const std::string &Name) : Name(Name) {}
 
 BinaryExprAst::BinaryExprAst(const std::string &Op,
                              std::unique_ptr<ExprAst> LHS,

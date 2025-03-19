@@ -1,13 +1,13 @@
 #pragma once
 
+#include <map>
 #include <memory>
 #include <string>
-#include <map>
 
-#include "llvm/IR/LLVMContext.h"
-#include "llvm/IR/IRBuilder.h"
-#include "llvm/IR/Module.h"
 #include "llvm/ADT/APInt.h"
+#include "llvm/IR/IRBuilder.h"
+#include "llvm/IR/LLVMContext.h"
+#include "llvm/IR/Module.h"
 
 #include "ast/Ast.hpp"
 #include "ast/AstVisitor.hpp"
