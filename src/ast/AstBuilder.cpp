@@ -7,6 +7,8 @@
 namespace sol::ast
 {
 
+using sol::parser::SolParser;
+
 std::any AstBuilder::visitProgram(SolParser::ProgramContext *context)
 {
     std::vector<std::unique_ptr<ProcedureAst>> Procs;

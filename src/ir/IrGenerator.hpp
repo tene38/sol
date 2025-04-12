@@ -17,7 +17,6 @@ namespace sol::ir
 
 class IrGenerator : public ast::AstVisitor
 {
-    const int INT_SIZE = 32; // bits
     llvm::LLVMContext *TheContext;
     llvm::IRBuilder<> *TheBuilder;
     llvm::Module *TheModule;
@@ -26,6 +25,8 @@ class IrGenerator : public ast::AstVisitor
     llvm::Value *Val;
 
   public:
+    const static int INT_SIZE = 32; // bits
+
     IrGenerator(llvm::LLVMContext *TheContext, llvm::IRBuilder<> *TheBuilder,
                 llvm::Module *TheModule);
 
