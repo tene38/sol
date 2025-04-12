@@ -9,8 +9,6 @@
 namespace sol::ast
 {
 
-using sol::parser::SolParser;
-
 class AstBuilder : public sol::parser::SolBaseVisitor
 {
   public:
@@ -19,14 +17,15 @@ class AstBuilder : public sol::parser::SolBaseVisitor
     std::unique_ptr<ReturnStatementAst> ReturnStatement;
     std::unique_ptr<ExprAst> Expr;
 
-    std::any visitProgram(SolParser::ProgramContext *context) override;
-    std::any visitProcedure(SolParser::ProcedureContext *context) override;
+    // I'm not a fan of RTTI and exceptions, but the ANTLR API uses them.
+    std::any visitProgram(parser::SolParser::ProgramContext *context) override;
+    std::any visitProcedure(parser::SolParser::ProcedureContext *context) override;
     std::any
-    visitReturnStatement(SolParser::ReturnStatementContext *context) override;
-    std::any visitIdentExpr(SolParser::IdentExprContext *context) override;
-    std::any visitCallExpr(SolParser::CallExprContext *context) override;
-    std::any visitIntExpr(SolParser::IntExprContext *context) override;
-    std::any visitBinopExpr(SolParser::BinopExprContext *context) override;
+    visitReturnStatement(parser::SolParser::ReturnStatementContext *context) override;
+    std::any visitIdentExpr(parser::SolParser::IdentExprContext *context) override;
+    std::any visitCallExpr(parser::SolParser::CallExprContext *context) override;
+    std::any visitIntExpr(parser::SolParser::IntExprContext *context) override;
+    std::any visitBinopExpr(parser::SolParser::BinopExprContext *context) override;
 };
 
 } // namespace sol::ast
