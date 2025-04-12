@@ -1,6 +1,5 @@
 #include <cstdlib>
 #include <filesystem>
-#include <iostream>
 #include <print>
 
 #include "llvm/IR/LegacyPassManager.h"
@@ -162,5 +161,7 @@ int main(const int argc, const char *argv[])
         std::println("Invoking: `{}`", ClangCommandline);
     }
 
+    // TODO: Write an abstraction for system-specific process APIs.
+    // Using [std::system] isn't the best idea, but for now it's simple and portable.
     std::system(ClangCommandline.c_str());
 }

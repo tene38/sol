@@ -102,3 +102,10 @@ Compiler debugging information can be showed using `-v`:
 ```
 $ solc -v
 ```
+
+# TODO
+
+TODO:
+- add the full example of Sol to README, to make a good first impression
+- add `procs.sol` from the first iteration after the full program to explain
+    that we're not there yet
