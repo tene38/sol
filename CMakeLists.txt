@@ -50,6 +50,12 @@ target_include_directories(solc PRIVATE
 # If the build fails while linking, remove `USE_SHARED` from the following call:
 llvm_config(solc USE_SHARED core)
 
+target_compile_options(solc PRIVATE
+    -Wall
+    -Wpedantic
+    # -O3
+)
+
 target_link_libraries(solc PRIVATE
     antlr4_static
 )
