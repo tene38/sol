@@ -28,7 +28,7 @@ jobs:
       # uses: ConorMacBride/install-package@v1.1.0
       # with:
       #   apt: libantlr4-runtime-dev llvm-19-dev libgtest-dev
-      run: pacman -Sy llvm antlr4-runtime gtest
+      run: pacman --noconfirm -Sy llvm antlr4-runtime gtest
         
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
