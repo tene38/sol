@@ -8,8 +8,8 @@ project(Sol C CXX)
 # ====================
 # Dependencies
 # ====================
-find_package(antlr4-runtime REQUIRED)
-find_package(LLVM REQUIRED CONFIG)
+find_package(antlr4-runtime 4.13 REQUIRED)
+find_package(LLVM 19.1 REQUIRED CONFIG)
 find_package(GTest)
 # include(FetchContent)
 # FetchContent_Declare(
