@@ -41,6 +41,7 @@ target_sources(solc PRIVATE
 
 target_include_directories(solc PRIVATE 
     ${LLVM_INCLUDE_DIRS}
+    ${ANTLR4_INCLUDE_DIR}
     src
 )
 
