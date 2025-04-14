@@ -1,6 +1,6 @@
 [requires]
 antlr4-cppruntime/4.13.1
-llvm-core/13.0.0
+llvm-core/19.1.7
 
 [generators]
 CMakeDeps
