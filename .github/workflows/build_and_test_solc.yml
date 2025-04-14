@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Install Dependencies
       # TODO: this should be baked into the container image, we should also switch to Conan, to have full control of library versions.
-      run: RUN apt-get update && apt-get install -y \
+      run: apt-get update && apt-get install -y \
         libantlr4-runtime-dev \
         llvm-19-dev \
         libgtest-dev \
