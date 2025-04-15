@@ -31,7 +31,9 @@ jobs:
     - name: Prepare environment
       run: pacman --noconfirm -Sy cmake tree python-pip
     
-    - uses: turtlebrowser/get-conan@v1.2
+    # - uses: turtlebrowser/get-conan@v1.2
+    - name: Install conan
+      run: pip3 install conan --break-system-packages
     
     - name: Cache Conan Dependencies
       id: cache-deps
