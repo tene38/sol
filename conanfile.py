@@ -9,6 +9,7 @@ class SolRecipe(ConanFile):
     def requirements(self):
         self.requires("antlr4-cppruntime/4.13.1")
         self.requires("llvm-core/19.1.7")
+        self.requires("gtest/1.16.0")
 
     def layout(self):
         cmake_layout(self)
