@@ -65,6 +65,12 @@ jobs:
         --settings=build_type=${{env.BUILD_TYPE}} 
         --profile:build=default
         --profile:host=llvm-no-build
+
+    - name: Bandaid patch the cmake toolchain file to use C++23
+      run: >
+        sed 
+        -i ${{github.workspace}}/dependencies/build/Release/generators/conan_toolchain.cmake
+        -e 's/set(CMAKE_CXX_STANDARD 17)/set(CMAKE_CXX_STANDARD 23)/g'
         
     - name: Debug CI
       run: tree ${{github.workspace}}
