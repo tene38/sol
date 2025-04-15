@@ -24,12 +24,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - uses: turtlebrowser/get-conan@v1.2
     # - uses: ConorMacBride/install-package@v1.1.0
     #   with:
     #     apt: build-essential cmake tree
+    
     - name: Prepare environment
       run: pacman --noconfirm -Sy cmake tree python-pip
+    
+    - uses: turtlebrowser/get-conan@v1.2
     
     - name: Cache Conan Dependencies
       id: cache-deps
