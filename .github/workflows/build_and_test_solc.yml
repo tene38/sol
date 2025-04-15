@@ -29,7 +29,7 @@ jobs:
     #   with:
     #     apt: build-essential cmake tree
     - name: Prepare environment
-      run: pacman --noconfirm -Sy cmake tree
+      run: pacman --noconfirm -Sy cmake tree python-pip
     
     - name: Cache Conan Dependencies
       id: cache-deps
