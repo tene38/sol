@@ -73,7 +73,7 @@ jobs:
         -e 's/set(CMAKE_CXX_STANDARD 17)/set(CMAKE_CXX_STANDARD 23)/g'
         
     - name: Debug CI
-      run: cat ${{github.workspace}}/dependencies/build/Release/generators/conan_toolchain.cmake
+      run: cat ${{github.workspace}}/dependencies/build/Release/generators/conan_toolchain.cmake; gcc --version
       
     - name: Configure CMake
       run: >
