@@ -25,6 +25,10 @@ jobs:
     - uses: actions/checkout@v4
     
     - uses: turtlebrowser/get-conan@v1.2
+
+    - uses: ConorMacBride/install-package@v1.1.0
+      with:
+        apt: build-essential cmake
     
     - name: Cache Conan Dependencies
       id: cache-deps
