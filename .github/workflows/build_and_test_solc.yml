@@ -28,7 +28,7 @@ jobs:
 
     - uses: ConorMacBride/install-package@v1.1.0
       with:
-        apt: build-essential cmake
+        apt: build-essential cmake tree
     
     - name: Cache Conan Dependencies
       id: cache-deps
@@ -63,6 +63,9 @@ jobs:
         --profile:build=llvm-no-build
         --profile:host=llvm-no-build
         
+    - name: Debug CI
+      run: tree ${{github.workspace}}
+      
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
