@@ -28,7 +28,7 @@ jobs:
     
     - name: Cache Conan Dependencies
       id: cache-deps
-      uses: actions/cache@v2
+      uses: actions/cache@v4.2.3
       with:
         key: conan-deps-${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
         path: ~/.conan2
