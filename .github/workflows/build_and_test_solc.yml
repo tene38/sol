@@ -52,7 +52,12 @@ jobs:
       run: mkdir -p ~/.conan2/profiles; printf '[settings]\narch=x86_64\nbuild_type=Release\ncompiler=gcc\ncompiler.cppstd=17\ncompiler.libcxx=libstdc++11\ncompiler.version=11\nos=Linux\n' > ~/.conan2/profiles/llvm-no-build
       
     - name: Install Dependencies
-      run: conan install . --output-folder=./dependencies --settings=build_type=${{env.BUILD_TYPE}} --profile:build=llvm-no-build
+      run: |
+        conan install . 
+        --output-folder=./dependencies 
+        --settings=build_type=${{env.BUILD_TYPE}} 
+        --profile:build=llvm-no-build
+        --profile:host=llvm-no-build
         
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
