@@ -1,4 +1,11 @@
-*.o
-build/
+# IDE
 .cache/
 .vscode/
+
+# Conan
+CMakeUserPresets.json
+dependencies/
+
+# Build
+**.o
+build/
