@@ -53,14 +53,17 @@ jobs:
       #   compiler.version=11
       #   os=Linux
       #   EOF
-      run: mkdir -p ~/.conan2/profiles; printf '[settings]\narch=x86_64\nbuild_type=Release\ncompiler=gcc\ncompiler.cppstd=17\ncompiler.libcxx=libstdc++11\ncompiler.version=11\nos=Linux\n' > ~/.conan2/profiles/llvm-no-build
+      run: >
+        mkdir -p ~/.conan2/profiles; 
+        printf '[settings]\narch=x86_64\nbuild_type=Release\ncompiler=gcc\ncompiler.cppstd=17\ncompiler.libcxx=libstdc++11\ncompiler.version=11\nos=Linux\n' > ~/.conan2/profiles/llvm-no-build;
+        printf '[settings]\narch=x86_64\nbuild_type=Release\ncompiler=gcc\ncompiler.cppstd=23\ncompiler.libcxx=libstdc++11\ncompiler.version=14\nos=Linux\n' > ~/.conan2/profiles/default;
       
     - name: Install Dependencies
       run: >
         conan install . 
         --output-folder=./dependencies 
         --settings=build_type=${{env.BUILD_TYPE}} 
-        --profile:build=llvm-no-build
+        --profile:build=default
         --profile:host=llvm-no-build
         
     - name: Debug CI
