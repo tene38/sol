@@ -30,7 +30,7 @@ jobs:
       id: cache-deps
       uses: actions/cache@v4.2.3
       with:
-        key: conan-deps-${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+        key: conan-deps-${{ runner.os }}-build-${{ hashFiles('**/conanfile.py') }}
         path: ~/.conan2
         
       # If we hit the cache, then we don't want to create a new profile
