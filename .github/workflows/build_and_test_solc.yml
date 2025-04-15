@@ -38,7 +38,7 @@ jobs:
       name: Create a Conan profile
       # To avoid having to build llvm locally, we specify a profile for which binaries are available from conan.io
       run: |
-        conan profile new default --detect
+        conan profile detect
         cat << EOF > ~/.conan2/profiles/llvm-no-build
         [settings]
         arch=x86_64
