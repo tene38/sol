@@ -74,7 +74,7 @@ jobs:
     - name: Bandaid patch the cmake toolchain file to use C++23
       run: >
         sed 
-        -i ${{github.workspace}}/dependencies/build/Release/generators/conan_toolchain.cmake
+        -i "$GITHUB_WORKSPACE/dependencies/build/Release/generators/conan_toolchain.cmake"
         -e 's/set(CMAKE_CXX_STANDARD 17)/set(CMAKE_CXX_STANDARD 23)/g'
         
     - name: Debug CI
@@ -82,8 +82,8 @@ jobs:
       
     - name: Configure CMake
       run: >
-        cmake -B ${{github.workspace}}/build 
-        -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/dependencies/build/Release/generators/conan_toolchain.cmake
+        cmake -B $GITHUB_WORKSPACE/build 
+        -DCMAKE_TOOLCHAIN_FILE=$GITHUB_WORKSPACE/dependencies/build/Release/generators/conan_toolchain.cmake
         -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
     - name: Build
@@ -91,5 +91,5 @@ jobs:
 
     - name: Test
       # working-directory: ${{github.workspace}}/build
-      run: cd "${{github.workspace}}/build" && ctest -C ${{env.BUILD_TYPE}}
+      run: cd "$GITHUB_WORKSPACE/build" && ctest -C ${{env.BUILD_TYPE}}
 
