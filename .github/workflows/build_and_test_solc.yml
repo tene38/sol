@@ -82,12 +82,12 @@ jobs:
       
     - name: Configure CMake
       run: >
-        cmake -B $GITHUB_WORKSPACE/build 
-        -DCMAKE_TOOLCHAIN_FILE=$GITHUB_WORKSPACE/dependencies/build/Release/generators/conan_toolchain.cmake
+        cmake -B "$GITHUB_WORKSPACE/build" 
+        -DCMAKE_TOOLCHAIN_FILE="$GITHUB_WORKSPACE/dependencies/build/Release/generators/conan_toolchain.cmake"
         -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
     - name: Build
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      run: cmake --build "$GITHUB_WORKSPACE/build" --config ${{env.BUILD_TYPE}}
 
     - name: Test
       # working-directory: ${{github.workspace}}/build
