@@ -48,14 +48,14 @@ target_include_directories(solc PRIVATE
 # TODO: make this work with packages from Conan. This makefile isn't portable in
 # this state.
 
-# If the build fails while linking, remove `USE_SHARED` from the following call:
-# llvm_config(solc USE_SHARED core)
-
 target_compile_options(solc PRIVATE
     -Wall
     -Wpedantic
     # -O3
 )
+
+# If the build fails while linking, remove `USE_SHARED` from the following call:
+# llvm_config(solc USE_SHARED core)
 
 target_link_libraries(solc PRIVATE
     antlr4_static
@@ -93,10 +93,11 @@ target_include_directories(tests PRIVATE
     src
 )
 
-llvm_config(tests USE_SHARED core)
+# llvm_config(tests USE_SHARED core)
 target_link_libraries(tests PRIVATE
     GTest::gtest_main
     antlr4_static
+    llvm-core::llvm-core
 )
 
 include(GoogleTest)
