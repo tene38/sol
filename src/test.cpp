@@ -89,6 +89,7 @@ TEST_F(TestIrGenerator, VisitAddition)
 
     IrGen.visit(&BinOp);
 
+
     llvm::Value *Val = IrGen.getVal();
     ASSERT_TRUE(Val != nullptr);
 
@@ -106,6 +107,8 @@ TEST_F(TestIrGenerator, VisitAddition)
     llvm::Argument *ArgX;
     ASSERT_TRUE(ArgX = dyn_cast<llvm::Argument>(RHS2));
     EXPECT_EQ(ArgX->getName(), "x");
+
+    Val->deleteValue();
 }
 
 TEST_F(TestIrGenerator, GeneratesCorrectIr1)
