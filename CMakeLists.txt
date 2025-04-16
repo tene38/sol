@@ -49,7 +49,7 @@ target_include_directories(solc PRIVATE
 # this state.
 
 # If the build fails while linking, remove `USE_SHARED` from the following call:
-llvm_config(solc USE_SHARED core)
+# llvm_config(solc USE_SHARED core)
 
 target_compile_options(solc PRIVATE
     -Wall
@@ -59,6 +59,7 @@ target_compile_options(solc PRIVATE
 
 target_link_libraries(solc PRIVATE
     antlr4_static
+    llvm-core::llvm-core
 )
 target_compile_definitions(solc PRIVATE
     ${LLVM_DEFINITIONS_LIST}
