@@ -23,27 +23,33 @@ Repository structure:
 
 # Building
 
-Project uses CMake as it's build system.
+Project uses CMake as it's build system. Packages are managed via Conan.
 
-Project dependencies:
+To build you must first install:
 
-- ANTLR4
-- LLVM
-- gtest
-- clang
+- a C++ compiler which supports C++23, eg. GCC14
+- cmake
+- make or ninja
 
-To build, first install the dependencies. You can do so using your distributions
-package manager. Building on Windows and MacOS is currently unsupported,
-although the code should be portable.
+You can do so using your distributions package manager. Building on Windows and
+MacOS is currently unsupported, although the code should be portable.
 
-WARNING: `conanfile.txt` is provided, but unsupported. `CMakeLists.txt` doesn't
-make use of it. Conan support is work-in-progress.
 
+To build, first install the packages specified in `conanfile.py`:
+
+```
+project_root/$ conan install . --output-folder=./dependencies --build=missing
+```
+
+WARNING: for certain conan profiles, conan may need to build llvm locally. It
+has to be done once, and takes about 1.5h on my hardware.
 
 To build, first create a build folder and configure CMake:
 
 ```
-project_root/$ mkdir build && cd build && cmake ..
+project_root/$ mkdir build && cd build
+project_root/$ cmake .. \
+    -DCMAKE_TOOLCHAIN_FILE=../dependencies/build/Release/generators/conan_toolchain.cmake
 ```
 
 To build the compiler:
