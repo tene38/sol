@@ -11,6 +11,74 @@ and "Sól" is the name for the Norse goddess of the Sun.
 The project uses exceptions and RTTI, but only because the ANTLR4 runtime
 requires it. I prefer to not use them if possible.
 
+As an end goal, the language should look like this:
+
+```
+/* 
+ * Having access to a binary semaphore, implement a general semaphore, which can
+ * be incremented or decremented by 1 or 3 (operations P1, P3, V1, V3) – the
+ * semaphore must of course never be negative.
+ */
+
+type GeneralSemaphore {
+
+	let n: integer;
+	let no_waiting: integer;
+	let mutex(1): BinarySemaphore;
+	let semP(0): BinarySemaphore;
+
+	Semaphore(n: integer) {
+		this.n = n;
+		this.no_waiting = 0;
+	}
+
+	// [n > 0]
+	procedure P1() {
+		mutex.p();
+		if (n == 0) {
+			no_waiting += 1;
+			mutex.v();
+			semP.p();
+			no_waiting -= 1;
+		}
+		n--;
+		mutex.v();
+	}
+
+	procedure V1() {
+		mutex.p();
+		n++;
+		if (no_waiting > 0) {
+			semP.v();
+		} else {
+			mutex.v();
+		}
+	}
+}
+```
+
+But we're currently far away from that goal. Current iteration only supports:
+
+- integers,
+- expressions,
+- procedures.
+
+Programs which can be written using these building blocks are limited:
+
+```
+procedure foo(x: int, y: int): int {
+	return x + y * y - x / 2;
+}
+
+procedure pow2(x: int) {
+	return x * x;
+}
+
+procedure main() {
+	return pow2(10) / foo(2, 2);
+}
+```
+
 # Project structure
 
 Repository structure:
@@ -108,10 +176,3 @@ Compiler debugging information can be showed using `-v`:
 ```
 $ solc -v
 ```
-
-# TODO
-
-TODO:
-- add the full example of Sol to README, to make a good first impression
-- add `procs.sol` from the first iteration after the full program to explain
-    that we're not there yet
